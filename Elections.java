@@ -1,23 +1,23 @@
-package election;
+package Election;
 
 import java.util.Arrays;
 
-//27.03.2020 озмчъ сбб бзйшеъ/omer
+//27.03.2020 пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ/omer
 public class Elections {
 
 	private Civilian[] pinkasBoharim;
 	private PoliticalParty[] partysList;
 	private Kalphi[] kalphiList;
 
-	public Elections(int numOfCivilians, int numOfPartys, int numOfKalphys) {// 27.03.2020 брай щочбм лод ажшзйн,офмвеъ
-																				// ечмфйеъ/omer
-		// цшйк мшаеъ ан двгмйн дамд жд ойоещ рлеп
+	public Elections(int numOfCivilians, int numOfPartys, int numOfKalphys) {// 27.03.2020 пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ,пїЅпїЅпїЅпїЅпїЅпїЅ
+																				// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ/omer
+		// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 		pinkasBoharim = new Civilian[numOfCivilians];
 		partysList = new PoliticalParty[numOfPartys];
 		kalphiList = new Kalphi[numOfPartys];
 	}
 
-	//// 27.03.2020 десфъй оъегеъ щогфйсеъ ажшзйн офмвеъ ечмфйеъ//
+	//// 27.03.2020 пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ//
 	public void showCitizens() {
 
 		System.out.println(Arrays.toString(pinkasBoharim));

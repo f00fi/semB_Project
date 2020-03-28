@@ -1,4 +1,4 @@
-package election;
+package Election;
 
 public class Civilian {
 

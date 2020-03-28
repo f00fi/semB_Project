@@ -1,10 +1,10 @@
-package election;
+package Election;
 
 import java.util.Arrays;
 
 public class Kalphi {
 	protected int id;
-	private static int idCounter = 0;
+	protected static int idCounter = 0;
 	protected String kalphiAddress;
 	protected Civilian[] eliglbleCitizens;
 	protected double votingPercentage;
