@@ -1,6 +1,6 @@
 package Election;
 
-public class Candidate extends Civilian {
+public class Candidate extends Citizen {
 
 	private PoliticalParty politicalParty;
 
@@ -9,7 +9,7 @@ public class Candidate extends Civilian {
 		super(name, id, yearOfBirth, votingKalphi, isIsolated);
 		this.politicalParty = politicalParty;
 	}
-	public Candidate(Civilian civilian,PoliticalParty politicalParty) {//27.3.2020 ���� ����� ���� ������ ������ �����/ omer
+	public Candidate(Citizen civilian,PoliticalParty politicalParty) {
 		this(civilian.name,civilian.id,civilian.yearOfBirth,civilian.votingKalphi,civilian.isIsolated,politicalParty);
 		
 	}
