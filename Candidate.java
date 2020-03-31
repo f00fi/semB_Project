@@ -14,6 +14,13 @@ public class Candidate extends Citizen {
 		
 	}
 
+	 public Candidate(Candidate candidate) {
+		super(candidate);
+		this.politicalParty = politicalParty;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return super.toString() + "Candidate [politicalParty=" + politicalParty + "]";

@@ -20,8 +20,15 @@ public class Elections {
 
 	// 29.03 - addkalphi method
 	public void addKalphi(Kalphi newKalphi) {
-		kalphiList[numOfKalphys] = newKalphi;
-		numOfKalphys++;
+		//if (newKalphi instanceof Kalphi) { ++++the same CONSTRUCTOR+++
+			kalphiList[numOfKalphys] = newKalphi;
+			numOfKalphys++;
+		}
+	//}
+
+	public void addCitizen(Citizen newcitizen) {
+		pinkasBoharim[numOfCitizens]=newcitizen;
+		numOfCitizens++;
 	}
 
 	public void showCitizens() {

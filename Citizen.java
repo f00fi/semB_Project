@@ -15,7 +15,13 @@ public class Citizen {
 		this.votingKalphi = votingKalphi;
 		this.isIsolated = isIsolated;
 	}
-
+	 public Citizen(Citizen citizen) {
+		this.name = name;
+		this.id = id;
+		this.yearOfBirth = yearOfBirth;
+		this.votingKalphi = votingKalphi;
+		this.isIsolated = isIsolated;
+	}
 	@Override
 	public String toString() {
 		return "Civilian [name=" + name + ", id=" + id + ", yearOfBirth=" + yearOfBirth + ", isIsolated=" + isIsolated

@@ -32,11 +32,20 @@ public class Program {
 				case -1:
 					break;
 				}
+			
+			case 2:
+			elections.addCitizen(new Citizen(){  //???
+			
+			}
+			
+			
 			case -1:
 				System.out.println("have a great day");
 				menuChoice = -1;
 				break;
+			
 			}
+			
 		}
 	}
 

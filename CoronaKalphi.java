@@ -11,6 +11,11 @@ public class CoronaKalphi extends Kalphi {
 		this.id = idCounter++;
 	}
 
+	 public CoronaKalphi(CoronaKalphi coronaKalphi) {
+		super(coronaKalphi);
+			this.id = idCounter++;
+	 }
+	
 	@Override
 	public String toString() {
 		return "CoronaKalphi [id=" + id + ", kalphiAddress=" + kalphiAddress + ", eliglbleCitizens="
