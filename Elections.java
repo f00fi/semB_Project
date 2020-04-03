@@ -6,35 +6,53 @@ public class Elections {
 
 	private Citizen[] pinkasBoharim;
 	private int numOfCitizens;
+	private int citiLogiSize;
+	private int citiPhysSize;
 	private PoliticalParty[] partysList;
-	private int numOfPartys;
+	private int partyLogiSize;
+	private int partyPhysSize;
 	private Kalphi[] kalphiList;
-	private int numOfKalphys;
+	private int kalphiLogiSize;
+	private int kalphiPhysSize;
 
 	public Elections(int numOfCitizens, int numOfPartys, int numOfKalphys) {
-
-		pinkasBoharim = new Citizen[numOfCitizens];
-		partysList = new PoliticalParty[numOfPartys];
-		kalphiList = new Kalphi[numOfPartys];
+		citiLogiSize = 15;
+		citiPhysSize = 0;
+		partyLogiSize = 3;
+		partyPhysSize = 0;
+		kalphiLogiSize = 3;
+		kalphiPhysSize = 0;
+		pinkasBoharim = new Citizen[citiLogiSize];
+		partysList = new PoliticalParty[partyLogiSize];
+		kalphiList = new Kalphi[kalphiLogiSize];
 	}
 
-	// 29.03 - addkalphi method
-	public void addKalphi(Kalphi newKalphi) {
-		//if (newKalphi instanceof Kalphi) { ++++the same CONSTRUCTOR+++
-			kalphiList[numOfKalphys] = newKalphi;
-			numOfKalphys++;
+	public void addKalphi(Object newKalphi) {
+		if (kalphiPhysSize == kalphiLogiSize) {
+			allocateKalphiLogicSize();
 		}
-	//}
+		if (newKalphi instanceof Kalphi)
+			kalphiList[kalphiPhysSize] = new Kalphi((Kalphi) newKalphi);
+		if (newKalphi instanceof CoronaKalphi)
+			kalphiList[kalphiPhysSize] = new CoronaKalphi((CoronaKalphi) newKalphi);
+		if (newKalphi instanceof MilitaryKalphi)
+			kalphiList[kalphiPhysSize] = new MilitaryKalphi((MilitaryKalphi) newKalphi);
+		kalphiPhysSize++;
+	}
 
-	public void addCitizen(Citizen newcitizen) {
-		pinkasBoharim[numOfCitizens]=newcitizen;
+	private void allocateKalphiLogicSize() {
+		kalphiLogiSize = kalphiLogiSize * 2;
+		Kalphi[] temp = Arrays.copyOf(kalphiList, kalphiLogiSize);
+		kalphiList = temp;
+	}
+
+	public void addCitizen(Citizen newcitizen) {// need to add size allocate for array like in kalphi
+		pinkasBoharim[numOfCitizens] = newcitizen;
 		numOfCitizens++;
 	}
 
 	public void showCitizens() {
-
 		System.out.println(Arrays.toString(pinkasBoharim));
-
 	}
 
 	public void showPartysList() {

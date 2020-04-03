@@ -32,21 +32,16 @@ public class Program {
 				case -1:
 					break;
 				}
-			
 			case 2:
-			elections.addCitizen(new Citizen(){  //???
-			
-			}
-			
-			
-			case -1:
-				System.out.println("have a great day");
-				menuChoice = -1;
 				break;
-			
 			}
-			
+//			case -1:
+//				System.out.println("have a great day");
+//				menuChoice = -1;
+//				break;
+
 		}
+
 	}
 
 	public static void main(String[] args) {
@@ -80,7 +75,8 @@ public class Program {
 			elections.addKalphi(kalphi[i]);
 		}
 		System.out.println(elections.toString());
-//		electionRound(elections);
-//		elections.showKalphiList();
+		electionRound(elections);
+		elections.showKalphiList();
+		System.out.println(omer);
 	}
 }

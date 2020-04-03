@@ -15,17 +15,23 @@ public class Kalphi {
 		this.kalphiAddress = kalphiAddress;
 		this.eliglbleCitizens = new Citizen[10];// need to change to variable)
 	}
-	 public Kalphi(Kalphi kalphi) {
-		 this.id = idCounter++;
-			this.kalphiAddress = kalphiAddress;
-			this.eliglbleCitizens = new Citizen[10];
-	 
-	 }
+
+	public Kalphi(Kalphi newKalphi) {
+		this.id = newKalphi.id;
+		this.kalphiAddress = newKalphi.kalphiAddress;
+		this.eliglbleCitizens = new Citizen[10];
+
+	}
+
 	@Override
 	public String toString() {
-		return "Kalphi [id=" + id + ", kalphiAddress=" + kalphiAddress + ", eliglbleCitizens="
-				+ Arrays.toString(eliglbleCitizens) + ", votingPercentage=" + votingPercentage + ", votingCount="
-				+ Arrays.toString(votingCount) + "]\n		";
+		return "Kalphi Details: \n"+"ID: " + id + 
+				"\n Kalphi address: " + kalphiAddress +
+				"\n Eliglble citizens: "
+				+ Arrays.toString(eliglbleCitizens) + 
+				"\n Voting percentage: " + votingPercentage +
+				",\n Voting count:"
+				+ Arrays.toString(votingCount) + "\n		";
 	}
 
 }

@@ -15,17 +15,15 @@ public class Citizen {
 		this.votingKalphi = votingKalphi;
 		this.isIsolated = isIsolated;
 	}
-	 public Citizen(Citizen citizen) {
-		this.name = name;
-		this.id = id;
-		this.yearOfBirth = yearOfBirth;
-		this.votingKalphi = votingKalphi;
-		this.isIsolated = isIsolated;
+
+	public Citizen(Citizen newCitizen) {
+		this(newCitizen.name, newCitizen.id, newCitizen.yearOfBirth, newCitizen.votingKalphi, newCitizen.isIsolated);
 	}
+
 	@Override
 	public String toString() {
-		return "Civilian [name=" + name + ", id=" + id + ", yearOfBirth=" + yearOfBirth + ", isIsolated=" + isIsolated
-				+ "]";
+		return "Citizen Details:  \n Name: " + name + "\n ID: " + id + "\n Year of birth: " + yearOfBirth
+				+ "\n Is isolated: " + (isIsolated == true ? "Yes" : "No");
 	}
 
 }
