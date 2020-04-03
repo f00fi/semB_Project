@@ -10,14 +10,14 @@ public class Candidate extends Citizen {
 		this.politicalParty = politicalParty;
 	}
 
-	public Candidate(Citizen civilian, PoliticalParty politicalParty) {
-		this(civilian.name, civilian.id, civilian.yearOfBirth, civilian.votingKalphi, civilian.isIsolated,
+	public Candidate(Citizen newCitizen, PoliticalParty politicalParty) {
+		this(newCitizen.name, newCitizen.id, newCitizen.yearOfBirth, newCitizen.votingKalphi, newCitizen.isIsolated,
 				politicalParty);
 	}
 
-	public Candidate(Candidate candidate) {
-		super(candidate);
-		this.politicalParty = candidate.politicalParty;
+	public Candidate(Candidate newCandidate) {
+		super(newCandidate);
+		this.politicalParty = newCandidate.politicalParty;
 	}
 
 	@Override
