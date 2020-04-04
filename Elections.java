@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class Elections {
 
 	private Citizen[] pinkasBoharim;
-	private int numOfCitizens;
 	private int citiLogiSize;
 	private int citiPhysSize;
 	private PoliticalParty[] partysList;
@@ -27,16 +26,15 @@ public class Elections {
 		kalphiList = new Kalphi[kalphiLogiSize];
 	}
 
-	public void addKalphi(Object newKalphi) {
-		if (kalphiPhysSize == kalphiLogiSize) {
+	public void addKalphi(int type, String address) {
+		if (kalphiPhysSize == kalphiLogiSize)
 			allocateKalphiLogicSize();
-		}
-		if (newKalphi instanceof Kalphi)
-			kalphiList[kalphiPhysSize] = new Kalphi((Kalphi) newKalphi);
-		if (newKalphi instanceof CoronaKalphi)
-			kalphiList[kalphiPhysSize] = new CoronaKalphi((CoronaKalphi) newKalphi);
-		if (newKalphi instanceof MilitaryKalphi)
-			kalphiList[kalphiPhysSize] = new MilitaryKalphi((MilitaryKalphi) newKalphi);
+		if (type == 1)
+			kalphiList[kalphiPhysSize] = new Kalphi(address);
+		if (type == 2)
+			kalphiList[kalphiPhysSize] = new CoronaKalphi(address);
+		if (type == 3)
+			kalphiList[kalphiPhysSize] = new MilitaryKalphi(address);
 		kalphiPhysSize++;
 	}
 
@@ -46,9 +44,17 @@ public class Elections {
 		kalphiList = temp;
 	}
 
-	public void addCitizen(Citizen newcitizen) {// need to add size allocate for array like in kalphi
-		pinkasBoharim[numOfCitizens] = newcitizen;
-		numOfCitizens++;
+	public void addCitizen(Citizen newcitizen) {
+		if (citiPhysSize == citiLogiSize)
+			allocateCitizenLogicSize();
+		pinkasBoharim[citiPhysSize] = newcitizen;
+		citiPhysSize++;
+	}
+
+	private void allocateCitizenLogicSize() {
+		citiLogiSize = citiLogiSize * 2;
+		Citizen[] temp = Arrays.copyOf(pinkasBoharim, citiLogiSize);
+		pinkasBoharim = temp;
 	}
 
 	public void showCitizens() {
