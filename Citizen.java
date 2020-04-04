@@ -26,7 +26,7 @@ public class Citizen {
 
 	public Citizen(Citizen newCitizen) {
 		this(newCitizen.name, newCitizen.id, newCitizen.yearOfBirth, newCitizen.votingKalphi, newCitizen.isIsolated);
-	}
+	}	
 
 	@Override
 	public String toString() {

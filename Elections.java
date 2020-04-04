@@ -44,10 +44,10 @@ public class Elections {
 		kalphiList = temp;
 	}
 
-	public void addCitizen(Citizen newcitizen) {
+	public void addCitizen(Citizen newCitizen) {
 		if (citiPhysSize == citiLogiSize)
 			allocateCitizenLogicSize();
-		pinkasBoharim[citiPhysSize] = newcitizen;
+		pinkasBoharim[citiPhysSize] = newCitizen;
 		citiPhysSize++;
 	}
 
@@ -74,8 +74,12 @@ public class Elections {
 
 	@Override
 	public String toString() {
-		return String.format("Elections round:\n" + "Voters List: %s \n" + "Partys List: %s \n" + "Kalphi List: %s \n",
-				Arrays.toString(pinkasBoharim), Arrays.toString(partysList), Arrays.toString(kalphiList));
+		String kalphis = "";
+		for (int i = 0; i < kalphiList.length; i++) {
+			kalphis += kalphiList[i];
+		}
+		return String.format("Elections round:\n" + "Voters List: %s \n" + "Partys List: %s \n" + "Kalphi List:\n %s \n",
+				Arrays.toString(pinkasBoharim), Arrays.toString(partysList) , kalphis);
 	}
 
 }

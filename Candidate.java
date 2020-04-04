@@ -7,7 +7,7 @@ public class Candidate extends Citizen {
 	public Candidate(String name, int id, int yearOfBirth, Kalphi votingKalphi, boolean isIsolated,
 			PoliticalParty politicalParty) {
 		super(name, id, yearOfBirth, votingKalphi, isIsolated);
-		this.politicalParty = politicalParty;
+		this.politicalParty = new PoliticalParty(politicalParty);
 	}
 
 	public Candidate(Citizen newCitizen, PoliticalParty politicalParty) {

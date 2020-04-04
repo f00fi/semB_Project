@@ -13,9 +13,6 @@ public class CoronaKalphi extends Kalphi {
 	@Override
 	public String toString() {
 		return super.toString();
-//		return "CoronaKalphi [id=" + id + ", kalphiAddress=" + kalphiAddress + ", eliglbleCitizens="
-//				+ Arrays.toString(eliglbleCitizens) + ", votingPercentage=" + votingPercentage + ", votingCount="
-//				+ Arrays.toString(votingCount) + "]";
 	}
 
 }

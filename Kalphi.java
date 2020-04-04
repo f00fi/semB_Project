@@ -13,7 +13,7 @@ public class Kalphi {
 	public Kalphi(String kalphiAddress) {
 		this.id = idCounter++;
 		this.kalphiAddress = kalphiAddress;
-		this.eliglbleCitizens = new Citizen[10];// need to change to variable)
+		this.eliglbleCitizens = new Citizen[1];
 	}
 
 	public Kalphi(Kalphi newKalphi) {
@@ -24,8 +24,8 @@ public class Kalphi {
 
 	@Override
 	public String toString() {
-		return "Kalphi Details: \n" + " Kalphi ID: " + id + "\n Type: " + this.getClass().getSimpleName()
-				+ "\n Kalphi address: " + kalphiAddress + "\n Eliglble citizens: " + Arrays.toString(eliglbleCitizens)
+		return "Kalphi ID: " + id + "\n Type: " + this.getClass().getSimpleName() + "\n Kalphi address: "
+				+ kalphiAddress + "\n Eliglble citizens: " + Arrays.toString(eliglbleCitizens)
 				+ "\n Voting percentage: " + votingPercentage + ",\n Voting count:" + Arrays.toString(votingCount)
 				+ "\n";
 	}

@@ -15,6 +15,7 @@ public class Program {
 			case 1:
 				printKalphiesTypes();
 				chooseKalphiType(elections, input.nextInt(), input);
+				break;
 			case 2:
 				addCitizen(elections, input);
 				break;
@@ -52,11 +53,11 @@ public class Program {
 		System.out.println(" 3 - Military Kalphi");
 	}
 
-	private static void chooseKalphiType(Elections elections, int kalphiType, Scanner address) {
+	private static void chooseKalphiType(Elections elections, int kalphiType, Scanner input) {
 		System.out.println("Please enter "
 				+ (kalphiType == 1 ? "kalphi " : kalphiType == 2 ? "corona " : kalphiType == 3 ? "millitary " : "")
 				+ "kalphi address");
-		elections.addKalphi(kalphiType, address.next());
+		elections.addKalphi(kalphiType, input.next());
 	}
 
 	private static void addCitizen(Elections elections, Scanner input) {
@@ -68,14 +69,12 @@ public class Program {
 	public static void main(String[] args) {
 		// Hard coded - 5 citizens ,3 parties ,2 candidates for each party
 		// and 2 kalphies
-		// Kalphi kalphiTelAviv = new Kalphi("Tel Aviv 1");
-		// Kalphi kalphiKfarYona = new Kalphi("Kfar Yona 1");
 		// 5 citizens
-//		Citizen eddie = new Citizen("Eddie", 1, 1992, kalphiTelAviv, true);
-//		Citizen omer = new Citizen("Omer", 2, 1994, kalphiKfarYona, false);
-//		Citizen dor = new Citizen("Dor", 2, 1998, kalphiTelAviv, false);
-//		Citizen lior = new Citizen("Lior", 2, 1992, kalphiTelAviv, true);
-//		Citizen shahaf = new Citizen("Shahaf", 2, 1994, kalphiKfarYona, false);
+		Citizen eddie = new Citizen("Eddie", 1992, true);
+		Citizen omer = new Citizen("Omer", 1994, false);
+		Citizen dor = new Citizen("Dor", 1998, false);
+		Citizen lior = new Citizen("Lior", 1992, true);
+		Citizen shahaf = new Citizen("Shahaf", 1994, false);
 		// 3 Parties
 		PoliticalParty yemin = new PoliticalParty("Yemin", "Yemin", LocalDate.of(2020, 04, 20));
 		PoliticalParty mercas = new PoliticalParty("Mercas", "Mercas", LocalDate.of(2020, 04, 20));
@@ -91,11 +90,8 @@ public class Program {
 		Elections elections = new Elections();
 		elections.addKalphi(1, "Tel Aviv 1");
 		elections.addKalphi(2, "Kfar Yona 2");
-		elections.addKalphi(3, "Kfar Yona 3");
+		elections.addKalphi(3, "Hell 3");
 		System.out.println(elections.toString());
 		electionRound(elections);
-//		elections.showKalphiList();
-		elections.showCitizens();
-
 	}
 }
