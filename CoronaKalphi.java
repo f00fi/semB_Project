@@ -1,7 +1,5 @@
 package Election;
 
-import java.util.Arrays;
-
 public class CoronaKalphi extends Kalphi {
 
 	public CoronaKalphi(String kalphiAddress) {

@@ -8,7 +8,6 @@ public class Program {
 	public static void electionRound(Elections elections) {
 		Scanner input = new Scanner(System.in);
 		int menuChoice = 0;
-		int kalphiType = 0;
 		while (menuChoice != -1) {
 			printMenuChoices();
 			menuChoice = input.nextInt();
@@ -17,6 +16,16 @@ public class Program {
 				printKalphiesTypes();
 				chooseKalphiType(elections, input.nextInt(), input);
 			case 2:
+				addCitizen(elections, input);
+				break;
+			case 5:
+				elections.showKalphiList();
+				break;
+			case 6:
+				elections.showCitizens();
+				break;
+			case 7:
+				elections.showPartysList();
 				break;
 			case -1:
 				System.out.println("Cya in 3 months (;");
@@ -26,25 +35,34 @@ public class Program {
 		}
 	}
 
-	public static void printMenuChoices() {
+	private static void printMenuChoices() {
 		System.out.println("Please choose your action");
 		System.out.println(" 1  - New kalphi");
 		System.out.println(" 2  - New citizen");
+		System.out.println(" 5  - Show kalphies");
+		System.out.println(" 6  - Show citizens");
+		System.out.println(" 7  - Show parties");
 		System.out.println("-1  - Exit");
 	}
 
-	public static void printKalphiesTypes() {
+	private static void printKalphiesTypes() {
 		System.out.println("Choose type of Kalphi");
 		System.out.println(" 1 - Regular Kalphi");
 		System.out.println(" 2 - Corona kalphi");
 		System.out.println(" 3 - Military Kalphi");
 	}
 
-	public static void chooseKalphiType(Elections elections, int kalphiType, Scanner address) {
+	private static void chooseKalphiType(Elections elections, int kalphiType, Scanner address) {
 		System.out.println("Please enter "
 				+ (kalphiType == 1 ? "kalphi " : kalphiType == 2 ? "corona " : kalphiType == 3 ? "millitary " : "")
 				+ "kalphi address");
 		elections.addKalphi(kalphiType, address.next());
+	}
+
+	private static void addCitizen(Elections elections, Scanner input) {
+		System.out.println("Plese fill citizen details in this order");
+		System.out.println("Name, year of birth, does he in isolation(true,false)");
+		elections.addCitizen(new Citizen(input.next(), input.nextInt(), input.nextBoolean()));
 	}
 
 	public static void main(String[] args) {
@@ -70,13 +88,14 @@ public class Program {
 //		Candidate lapid = new Candidate("Lapid", 2, 1985, kalphiTelAviv, false, mercas);
 //		Candidate merav = new Candidate("Merav", 2, 1992, kalphiTelAviv, true, mercas);
 
-		Elections elections = new Elections(11, 3, 2);
+		Elections elections = new Elections();
 		elections.addKalphi(1, "Tel Aviv 1");
 		elections.addKalphi(2, "Kfar Yona 2");
 		elections.addKalphi(3, "Kfar Yona 3");
 		System.out.println(elections.toString());
 		electionRound(elections);
-		elections.showKalphiList();
+//		elections.showKalphiList();
+		elections.showCitizens();
 
 	}
 }

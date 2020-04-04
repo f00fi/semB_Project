@@ -14,12 +14,12 @@ public class Elections {
 	private int kalphiLogiSize;
 	private int kalphiPhysSize;
 
-	public Elections(int numOfCitizens, int numOfPartys, int numOfKalphys) {
-		citiLogiSize = 15;
+	public Elections() {
+		citiLogiSize = 1;
 		citiPhysSize = 0;
-		partyLogiSize = 3;
+		partyLogiSize = 1;
 		partyPhysSize = 0;
-		kalphiLogiSize = 3;
+		kalphiLogiSize = 1;
 		kalphiPhysSize = 0;
 		pinkasBoharim = new Citizen[citiLogiSize];
 		partysList = new PoliticalParty[partyLogiSize];
@@ -58,15 +58,18 @@ public class Elections {
 	}
 
 	public void showCitizens() {
-		System.out.println(Arrays.toString(pinkasBoharim));
+		for (int i = 0; i < citiPhysSize; i++)
+			System.out.println(pinkasBoharim[i]);
 	}
 
 	public void showPartysList() {
-		System.out.println(Arrays.toString(partysList));
+		for (int i = 0; i < partyPhysSize; i++)
+			System.out.println(partysList[i]);
 	}
 
 	public void showKalphiList() {
-		System.out.println(Arrays.toString(kalphiList));
+		for (int i = 0; i < kalphiPhysSize; i++)
+			System.out.println(kalphiList[i]);
 	}
 
 	@Override

@@ -3,10 +3,18 @@ package Election;
 public class Citizen {
 
 	protected String name;
+	protected static int idCounter = 1;
 	protected int id;
 	protected int yearOfBirth;
 	protected Kalphi votingKalphi;
 	protected boolean isIsolated;
+
+	public Citizen(String name, int yearOfBirth, boolean isIsolated) {
+		this.name = name;
+		this.id = idCounter++;
+		this.yearOfBirth = yearOfBirth;
+		this.isIsolated = isIsolated;
+	}
 
 	public Citizen(String name, int id, int yearOfBirth, Kalphi votingKalphi, boolean isIsolated) {
 		this.name = name;
