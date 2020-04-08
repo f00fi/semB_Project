@@ -26,6 +26,19 @@ public class Elections {
 		kalphiList = new Kalphi[kalphiLogiSize];
 	}
 
+	public void addCandidate(int identityNumber,String nameOfParty) {
+		for (int i = 0; i < pinkasBoharim.length; i++) {
+			if(pinkasBoharim[i]!=null && pinkasBoharim[i].getIdentityNumber()==identityNumber);
+		for (int j = 0; j < partysList.length; j++) {
+			if(partysList[j]!=null && partysList[j].getNameOfParty().equals(nameOfParty));
+			
+		
+			pinkasBoharim[i]=new Candidate(pinkasBoharim[i], partysList[j]);
+		}
+	}}
+	
+	
+	
 	public void addKalphi(int type, String address) {
 		if (kalphiPhysSize == kalphiLogiSize)
 			allocateKalphiLogicSize();
@@ -56,7 +69,19 @@ public class Elections {
 		Citizen[] temp = Arrays.copyOf(pinkasBoharim, citiLogiSize);
 		pinkasBoharim = temp;
 	}
-
+	public void addPoliticalParty(PoliticalParty newPoliticalParty) {
+		if(partyPhysSize==partyLogiSize)
+			allocatePoliticalPartyLogicSize();
+		partysList[partyPhysSize]=newPoliticalParty;
+		partyPhysSize++;
+	}
+	
+	
+	private void allocatePoliticalPartyLogicSize() {
+		partyLogiSize=partyLogiSize*2;
+		PoliticalParty[] temp=Arrays.copyOf(partysList,partyLogiSize);
+		partysList=temp;
+	}
 	public void showCitizens() {
 		for (int i = 0; i < citiPhysSize; i++)
 			System.out.println(pinkasBoharim[i]);

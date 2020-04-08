@@ -5,19 +5,31 @@ import java.time.LocalDate;
 public class PoliticalParty {
 
 	private String nameOfParty;
-	private String politicalOrientation;
+	public enum epoliticalOrientation{yemin,mercas,small};
 	private LocalDate thePartyFoundingDate;
-
-	public PoliticalParty(String nameOfParty, String politicalOrientation, LocalDate thePartyFoundingDate) {
+	private epoliticalOrientation politicalOrientation;
+	
+	public PoliticalParty(String nameOfParty, epoliticalOrientation politicalOrientation, LocalDate thePartyFoundingDate) {
 		this.nameOfParty = nameOfParty;
 		this.politicalOrientation = politicalOrientation;
 		this.thePartyFoundingDate = thePartyFoundingDate;
 	}
 
-	public PoliticalParty(PoliticalParty newPoliticalParty) {
+		
+	
+		public PoliticalParty(PoliticalParty newPoliticalParty) {
 		this(newPoliticalParty.nameOfParty, newPoliticalParty.politicalOrientation,
 				newPoliticalParty.thePartyFoundingDate);
 	}
+
+	
+
+
+	public String getNameOfParty() {
+			return nameOfParty;
+		}
+
+
 
 	@Override
 	public String toString() {

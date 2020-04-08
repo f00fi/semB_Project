@@ -4,15 +4,16 @@ public class Candidate extends Citizen {
 
 	private PoliticalParty politicalParty;
 
-	public Candidate(String name, int id, int yearOfBirth, Kalphi votingKalphi, boolean isIsolated,
+	public Candidate(String name,int identityNumber ,int id, int yearOfBirth, Kalphi votingKalphi, boolean isIsolated,
 			PoliticalParty politicalParty) {
-		super(name, id, yearOfBirth, votingKalphi, isIsolated);
+		super(name, identityNumber,id, yearOfBirth, votingKalphi, isIsolated);
 		this.politicalParty = new PoliticalParty(politicalParty);
 	}
 
 	public Candidate(Citizen newCitizen, PoliticalParty politicalParty) {
-		this(newCitizen.name, newCitizen.id, newCitizen.yearOfBirth, newCitizen.votingKalphi, newCitizen.isIsolated,
-				politicalParty);
+		super(newCitizen);
+		this.politicalParty=politicalParty;
+				
 	}
 
 	public Candidate(Candidate newCandidate) {
