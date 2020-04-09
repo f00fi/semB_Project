@@ -4,17 +4,16 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 public class PoliticalParty {
-	public enum politicalOrientation {
+	public enum ePoliticalOrientation {
 		left, center, right
 	};
-
 	private String nameOfParty;
 	private LocalDate thePartyFoundingDate;
 	private Candidate[] candidatesList;
 	int candidatesListPhysSize, candidatesListLogiSize;
-	private politicalOrientation politicalOrientation;
+	private ePoliticalOrientation politicalOrientation;
 
-	public PoliticalParty(String nameOfParty, politicalOrientation politicalOrientation,
+	public PoliticalParty(String nameOfParty, ePoliticalOrientation politicalOrientation,
 			LocalDate thePartyFoundingDate) {
 		this.nameOfParty = nameOfParty;
 		this.politicalOrientation = politicalOrientation;

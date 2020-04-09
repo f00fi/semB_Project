@@ -3,10 +3,6 @@ package Election;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
-import Election.PoliticalParty.politicalOrientation;
-
 public class Program {
 	public static void electionRound(Elections elections) {
 		Scanner input = new Scanner(System.in);
@@ -86,8 +82,9 @@ public class Program {
 		boolean added;
 		System.out.println("plese fill PoliticalParty details in this order");
 		System.out.println("name, political Orientation (left,center,right), the PartyFounding Date (year,month,day)");
-		added = elections.addPoliticalParty(new PoliticalParty(input.next(), politicalOrientation.valueOf(input.next()),
-				LocalDate.of(input.nextInt(), input.nextInt(), input.nextInt())));
+		added = elections.addPoliticalParty(
+				new PoliticalParty(input.next(), PoliticalParty.ePoliticalOrientation.valueOf(input.next()),
+						LocalDate.of(input.nextInt(), input.nextInt(), input.nextInt())));
 		System.out.println(added == true ? "Party added" : "failed to add party");
 	}
 
@@ -104,9 +101,12 @@ public class Program {
 		Citizen lior = new Citizen("Lior", 454545, 1992, true);
 		Citizen shahaf = new Citizen("Shahaf", 425542, 1994, false);
 		// 3 Parties
-		PoliticalParty yemin = new PoliticalParty("Yemin", politicalOrientation.right, LocalDate.of(2020, 04, 20));
-		PoliticalParty mercas = new PoliticalParty("Mercas", politicalOrientation.center, LocalDate.of(2020, 04, 20));
-		PoliticalParty small = new PoliticalParty("Small", politicalOrientation.left, LocalDate.of(2020, 04, 20));
+		PoliticalParty yemin = new PoliticalParty("Yemin", PoliticalParty.ePoliticalOrientation.right,
+				LocalDate.of(2020, 04, 20));
+		PoliticalParty mercas = new PoliticalParty("Mercas", PoliticalParty.ePoliticalOrientation.center,
+				LocalDate.of(2020, 04, 20));
+		PoliticalParty small = new PoliticalParty("Small", PoliticalParty.ePoliticalOrientation.left,
+				LocalDate.of(2020, 04, 20));
 		// 6 candidates
 		Candidate bibi = new Candidate("Benyamin", 1, 1960, false, yemin);
 		Candidate gantz = new Candidate("Gantz", 2, 1994, false, yemin);
@@ -116,6 +116,9 @@ public class Program {
 		Candidate merav = new Candidate("Merav", 6, 1992, true, mercas);
 
 		Elections elections = new Elections();
+		elections.addKalphi(1, "Tel Aviv 1");
+		elections.addKalphi(2, "Kfar Yona 2");
+		elections.addKalphi(3, "Hell 3");
 		elections.addCitizen(shahaf);
 		elections.addCitizen(eddie);
 		elections.addCitizen(lior);
@@ -136,9 +139,7 @@ public class Program {
 		elections.addCandidate(4, small.getNameOfParty());
 		elections.addCandidate(5, mercas.getNameOfParty());
 		elections.addCandidate(6, mercas.getNameOfParty());
-		elections.addKalphi(1, "Tel Aviv 1");
-		elections.addKalphi(2, "Kfar Yona 2");
-		elections.addKalphi(3, "Hell 3");
+
 
 		return elections;
 	}
@@ -146,7 +147,7 @@ public class Program {
 	public static void main(String[] args) {
 		Elections elections = hardCoded();
 		System.out.println(elections.toString());
-		
+
 //		electionRound(elections);
 	}
 }

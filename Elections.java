@@ -57,6 +57,7 @@ public class Elections {
 			allocateCitizenLogicSize();
 		pinkasBoharim[citiPhysSize] = newCitizen;
 		citiPhysSize++;
+		assignKalphi(newCitizen);
 		return true;
 	}
 
@@ -105,8 +106,30 @@ public class Elections {
 			type = 3;
 		else
 			type = 1;
-		
-//		citizen.votingKalphi = 
+		citizen.votingKalphi = kalphiList[getRightKalphi(type)];
+		citizen.votingKalphi.addToKalphi(citizen);
+	}
+
+	private int getRightKalphi(int type) {
+		int rand = ((int) (Math.random() * 10) + 1);
+		int i = 0;
+		while (true) {
+			if (type == 3 && kalphiList[i] instanceof MilitaryKalphi) {
+				if (((int) (Math.random() * 10) + 1) == rand)
+					return i;
+			}
+			if (type == 2 && kalphiList[i] instanceof CoronaKalphi) {
+				if (((int) (Math.random() * 10) + 1) == rand)
+					return i;
+			}
+			if (type == 1 && !(kalphiList[i] instanceof CoronaKalphi) && !(kalphiList[i] instanceof MilitaryKalphi)) {
+				if (((int) (Math.random() * 10) + 1) == rand)
+					return i;
+			}
+			i++;
+			if (i == kalphiPhysSize)
+				i = 0;
+		}
 	}
 
 	public void showCitizens() {
