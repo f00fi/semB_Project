@@ -3,12 +3,11 @@ package Election;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import Election.PoliticalParty.epoliticalOrientation;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
+import Election.PoliticalParty.politicalOrientation;
 
 public class Program {
-
-	private static final PoliticalParty String = null;
-
 	public static void electionRound(Elections elections) {
 		Scanner input = new Scanner(System.in);
 		int menuChoice = 0;
@@ -66,54 +65,88 @@ public class Program {
 	}
 
 	private static void chooseKalphiType(Elections elections, int kalphiType, Scanner input) {
+		boolean added;
 		System.out.println("Please enter "
 				+ (kalphiType == 1 ? "kalphi " : kalphiType == 2 ? "corona " : kalphiType == 3 ? "millitary " : "")
 				+ "kalphi address");
-		elections.addKalphi(kalphiType, input.next());
+		added = elections.addKalphi(kalphiType, input.next());
+		System.out.println(added == true ? "Kalphi added" : "failed to add kalphi");
 	}
 
 	private static void addCitizen(Elections elections, Scanner input) {
+		boolean added;
 		System.out.println("Plese fill citizen details in this order");
 		System.out.println("Name, identityNumber ,year of birth, does he in isolation(true,false)");
-		elections.addCitizen(new Citizen(input.next(),input.nextInt() ,input.nextInt(), input.nextBoolean()));
+		added = elections.addCitizen(new Citizen(input.next(), input.nextInt(), input.nextInt(), input.nextBoolean()));
+		System.out.println(added == true ? "Citzen added" : "failed to add citizen");
+
 	}
-	public static void addPoliticalParty(Elections elections,Scanner input) {
+
+	public static void addPoliticalParty(Elections elections, Scanner input) {
+		boolean added;
 		System.out.println("plese fill PoliticalParty details in this order");
-		System.out.println("name, political Orientation (yemin,mercas,small), the PartyFounding Date (year,month,day)" );
-		elections.addPoliticalParty(new PoliticalParty(input.next(), epoliticalOrientation.valueOf(input.next()), LocalDate.of(input.nextInt(), input.nextInt(), input.nextInt())));
-		
+		System.out.println("name, political Orientation (left,center,right), the PartyFounding Date (year,month,day)");
+		added = elections.addPoliticalParty(new PoliticalParty(input.next(), politicalOrientation.valueOf(input.next()),
+				LocalDate.of(input.nextInt(), input.nextInt(), input.nextInt())));
+		System.out.println(added == true ? "Party added" : "failed to add party");
 	}
-	public static void addCandidate(Elections elections,Scanner input) {
+
+	public static void addCandidate(Elections elections, Scanner input) {
 		System.out.println("plese entar identity number and political Party name ");
 		elections.addCandidate(input.nextInt(), input.next());
 	}
-	
-	public static void main(String[] args) {
-		// Hard coded - 5 citizens ,3 parties ,2 candidates for each party
-		// and 2 kalphies
+
+	public static Elections hardCoded() {
 		// 5 citizens
-		Citizen eddie = new Citizen("Eddie", 3835693,1992, true);
-		Citizen omer = new Citizen("Omer", 45425,1994, false);
-		Citizen dor = new Citizen("Dor", 24545,1998, false);
-		Citizen lior = new Citizen("Lior",454545 ,1992, true);
-		Citizen shahaf = new Citizen("Shahaf", 425542,1994, false);
+		Citizen eddie = new Citizen("Eddie", 3835693, 1992, true);
+		Citizen omer = new Citizen("Omer", 45425, 1994, false);
+		Citizen dor = new Citizen("Dor", 24545, 1998, false);
+		Citizen lior = new Citizen("Lior", 454545, 1992, true);
+		Citizen shahaf = new Citizen("Shahaf", 425542, 1994, false);
 		// 3 Parties
-		PoliticalParty yemin = new PoliticalParty("Yemin", epoliticalOrientation.yemin, LocalDate.of(2020, 04, 20));
-		PoliticalParty mercas = new PoliticalParty("Mercas", epoliticalOrientation.mercas, LocalDate.of(2020, 04, 20));
-		PoliticalParty small = new PoliticalParty("Small", epoliticalOrientation.small, LocalDate.of(2020, 04, 20));
+		PoliticalParty yemin = new PoliticalParty("Yemin", politicalOrientation.right, LocalDate.of(2020, 04, 20));
+		PoliticalParty mercas = new PoliticalParty("Mercas", politicalOrientation.center, LocalDate.of(2020, 04, 20));
+		PoliticalParty small = new PoliticalParty("Small", politicalOrientation.left, LocalDate.of(2020, 04, 20));
 		// 6 candidates
-//		Candidate bibi = new Candidate("Benyamin", 1, 1960, kalphiTelAviv, false, yemin);
-//		Candidate gantz = new Candidate("Gantz", 2, 1994, kalphiKfarYona, false, yemin);
-//		Candidate mia = new Candidate("Mia", 2, 1985, kalphiTelAviv, false, small);
-//		Candidate ariel = new Candidate("Ariel", 2, 1992, kalphiTelAviv, true, small);
-//		Candidate lapid = new Candidate("Lapid", 2, 1985, kalphiTelAviv, false, mercas);
-//		Candidate merav = new Candidate("Merav", 2, 1992, kalphiTelAviv, true, mercas);
+		Candidate bibi = new Candidate("Benyamin", 1, 1960, false, yemin);
+		Candidate gantz = new Candidate("Gantz", 2, 1994, false, yemin);
+		Candidate mia = new Candidate("Mia", 3, 1985, false, small);
+		Candidate ariel = new Candidate("Ariel", 4, 1992, true, small);
+		Candidate lapid = new Candidate("Lapid", 5, 1985, false, mercas);
+		Candidate merav = new Candidate("Merav", 6, 1992, true, mercas);
 
 		Elections elections = new Elections();
+		elections.addCitizen(shahaf);
+		elections.addCitizen(eddie);
+		elections.addCitizen(lior);
+		elections.addCitizen(omer);
+		elections.addCitizen(dor);
+		elections.addCitizen(bibi);
+		elections.addCitizen(gantz);
+		elections.addCitizen(mia);
+		elections.addCitizen(ariel);
+		elections.addCitizen(lapid);
+		elections.addCitizen(merav);
+		elections.addPoliticalParty(yemin);
+		elections.addPoliticalParty(mercas);
+		elections.addPoliticalParty(small);
+		elections.addCandidate(1, yemin.getNameOfParty());
+		elections.addCandidate(2, yemin.getNameOfParty());
+		elections.addCandidate(3, small.getNameOfParty());
+		elections.addCandidate(4, small.getNameOfParty());
+		elections.addCandidate(5, mercas.getNameOfParty());
+		elections.addCandidate(6, mercas.getNameOfParty());
 		elections.addKalphi(1, "Tel Aviv 1");
 		elections.addKalphi(2, "Kfar Yona 2");
 		elections.addKalphi(3, "Hell 3");
+
+		return elections;
+	}
+
+	public static void main(String[] args) {
+		Elections elections = hardCoded();
 		System.out.println(elections.toString());
-		electionRound(elections);
+		
+//		electionRound(elections);
 	}
 }
