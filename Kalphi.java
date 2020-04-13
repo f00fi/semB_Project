@@ -1,6 +1,7 @@
 package Election;
 
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Kalphi {
 	protected int id;
@@ -16,12 +17,14 @@ public class Kalphi {
 		this.kalphiAddress = kalphiAddress;
 		kalphiLogiSize = 1;
 		this.eliglbleCitizens = new Citizen[kalphiLogiSize];
+		this.votingCount = new int[1];
 	}
 
 	public Kalphi(Kalphi newKalphi) {
 		this.id = newKalphi.id;
 		this.kalphiAddress = newKalphi.kalphiAddress;
 		this.eliglbleCitizens = new Citizen[newKalphi.kalphiLogiSize];
+		this.votingCount = new int[1];
 	}
 
 	public void addToKalphi(Citizen newCitizen) {
@@ -34,6 +37,30 @@ public class Kalphi {
 		kalphiLogiSize = kalphiLogiSize * 2;
 		Citizen[] temp = Arrays.copyOf(eliglbleCitizens, kalphiLogiSize);
 		eliglbleCitizens = temp;
+	}
+
+	public String getKalphiAddress() {
+		return this.kalphiAddress;
+	}
+
+	public int getVotingCount(int partyIndex) {
+		return votingCount[partyIndex];
+	}
+
+	protected void setVotingCount(int numOfParties) {
+		this.votingCount = new int[numOfParties];
+	}
+
+	public void Vote() {
+		boolean IsVoting;
+		int partyChoice;
+		for (int i = 0; i < kalphiPhysSize; i++) {
+			IsVoting = ThreadLocalRandom.current().nextBoolean();
+			if (IsVoting) {
+				partyChoice = ThreadLocalRandom.current().nextInt(0, votingCount.length);
+				votingCount[partyChoice]++;
+			}
+		}
 	}
 
 	@Override

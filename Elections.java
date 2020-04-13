@@ -9,11 +9,13 @@ public class Elections {
 	private int citiLogiSize;
 	private int citiPhysSize;
 	private PoliticalParty[] partysList;
+	private int[] electionsResults;
 	private int partyLogiSize;
 	private int partyPhysSize;
 	private Kalphi[] kalphiList;
 	private int kalphiLogiSize;
 	private int kalphiPhysSize;
+	private boolean elected;
 
 	public Elections() {
 		citiLogiSize = 1;
@@ -25,6 +27,8 @@ public class Elections {
 		pinkasBoharim = new Citizen[citiLogiSize];
 		partysList = new PoliticalParty[partyLogiSize];
 		kalphiList = new Kalphi[kalphiLogiSize];
+		elected = false;
+		electionsResults = new int[1];
 	}
 
 	public boolean addKalphi(int type, String address) {
@@ -132,6 +136,34 @@ public class Elections {
 		}
 	}
 
+	public void electionsRound() {
+		electionsResults = new int[partyPhysSize];
+		for (int i = 0; i < kalphiPhysSize; i++) {
+			kalphiList[i].setVotingCount(partyPhysSize);// sync parties list with kalphies
+			kalphiList[i].Vote();
+			for (int j = 0; j < partyPhysSize; j++) {
+				electionsResults[j] += kalphiList[i].getVotingCount(j);
+			}
+		}
+		elected = true;
+	}
+
+	public void kalphiResult() {
+		for (int i = 0; i < kalphiPhysSize; i++) {
+			System.out.println("In Kalphi of type " + kalphiList[i].getClass().getName() + " in "
+					+ kalphiList[i].getKalphiAddress() + "The results are:");
+			for (int j = 0; j < partyPhysSize; j++) {
+				System.out.println(partysList[j].getNameOfParty() + ": " + kalphiList[i].getVotingCount(j));
+			}
+		}
+		System.out.println("*****************");
+		System.out.println("Total Votes");
+		for (int j = 0; j < partyPhysSize; j++) {
+			System.out.println(partysList[j].getNameOfParty() + ": " + electionsResults[j]);
+		}
+		System.out.println("*****************");
+	}
+
 	public void showCitizens() {
 		for (int i = 0; i < citiPhysSize; i++)
 			System.out.println(pinkasBoharim[i]);
@@ -145,6 +177,15 @@ public class Elections {
 	public void showKalphiList() {
 		for (int i = 0; i < kalphiPhysSize; i++)
 			System.out.println(kalphiList[i]);
+	}
+
+	public Kalphi GetKalphi(int kalphiID) {
+		if (kalphiList[kalphiID] instanceof CoronaKalphi)
+			return (CoronaKalphi) kalphiList[kalphiID];
+		if (kalphiList[kalphiID] instanceof MilitaryKalphi)
+			return (MilitaryKalphi) kalphiList[kalphiID];
+
+		return kalphiList[kalphiID];
 	}
 
 	@Override
@@ -164,6 +205,10 @@ public class Elections {
 		return String.format(
 				"Elections round:\n" + "Voters List:\n %s " + "\nPartys List:\n %s \n" + "\nKalphi List:\n %s \n",
 				boharim, parties, kalphis);
+	}
+
+	public boolean getElected() {
+		return elected;
 	}
 
 }
