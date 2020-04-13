@@ -16,6 +16,7 @@ public class Elections {
 	private int kalphiLogiSize;
 	private int kalphiPhysSize;
 	private boolean elected;
+	private LocalDate electionsDate;
 
 	public Elections() {
 		citiLogiSize = 1;
@@ -145,27 +146,30 @@ public class Elections {
 				electionsResults[j] += kalphiList[i].getVotingCount(j);
 			}
 		}
+		electionsDate = LocalDate.now();
 		elected = true;
 	}
 
 	public void kalphiResult() {
 		for (int i = 0; i < kalphiPhysSize; i++) {
-			System.out.println("In Kalphi of type " + kalphiList[i].getClass().getName() + " in "
-					+ kalphiList[i].getKalphiAddress() + "The results are:");
+			System.out.println("***********************************************************************");
+			System.out.println("In " + kalphiList[i].getClass().getSimpleName() + " on "
+					+ kalphiList[i].getKalphiAddress() + " The results are:");
+			System.out.println("Total voters: " + kalphiList[i].getNumOfVoters());
+			System.out.println("Votes percetanage: " + kalphiList[i].getVotingPercentage() + "%");
 			for (int j = 0; j < partyPhysSize; j++) {
 				System.out.println(partysList[j].getNameOfParty() + ": " + kalphiList[i].getVotingCount(j));
-			
 			}
 		}
 		System.out.println("*****************");
-		System.out.println("Total Votes");
+		System.out.println("Total Votes:");
 		for (int j = 0; j < partyPhysSize; j++) {
 			System.out.println(partysList[j].getNameOfParty() + ": " + electionsResults[j]);
 		}
 		System.out.println("*****************");
+
 	}
-	
-	
+
 	public void showCitizens() {
 		for (int i = 0; i < citiPhysSize; i++)
 			System.out.println(pinkasBoharim[i]);
@@ -191,15 +195,10 @@ public class Elections {
 	}
 
 	public boolean equals() {
-		
+
 		return true;
 	}
-	
-	
-	
-	
-	
-	
+
 	@Override
 	public String toString() {
 		String boharim = "";

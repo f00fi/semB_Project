@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
+import Election.PoliticalParty.ePoliticalOrientation;
+
 public class Program {
 	public static void electionRound(Elections elections) {
 		Scanner input = new Scanner(System.in);
@@ -40,9 +42,8 @@ public class Program {
 			case 9:
 				if (elections.getElected()) {
 					elections.kalphiResult();
-					
-				}
-					else {
+
+				} else {
 					System.out.println("***************************");
 					System.out.println("We didnt have elections yet");
 					System.out.println("***************************");
@@ -66,8 +67,8 @@ public class Program {
 		System.out.println(" 6  - Show citizens");
 		System.out.println(" 7  - Show parties");
 		System.out.println(" 8  - Elections");
-		System.out.println(" 9  - show elections results");
-		System.out.println("-1  - Exit");
+		System.out.println(" 9  - Show results");
+		System.out.println("10 - Exit");
 	}
 
 	private static void printKalphiesTypes() {
@@ -108,6 +109,27 @@ public class Program {
 	public static void addCandidate(Elections elections, Scanner input) {
 		System.out.println("plese entar identity number and political Party name ");
 		elections.addCandidate(input.nextInt(), input.next());
+	}
+
+	public static void fillRandom(Elections elections) {
+		int type, age, numOfCitizens, numOfCandidates, numOfKalphies, numOfParties, camp;
+		numOfCitizens = ThreadLocalRandom.current().nextInt(0, 100000);
+		numOfKalphies = numOfCitizens / 400;
+		numOfParties = ThreadLocalRandom.current().nextInt(1, 20);
+		Boolean isInBidud;
+		for (int i = 4; i < numOfKalphies; i++) {
+			type = ThreadLocalRandom.current().nextInt(1, 4);
+			elections.addKalphi(type, "Random Kalphi_" + i);
+		}
+		for (int i = 7; i < numOfCitizens; i++) {
+			age = ThreadLocalRandom.current().nextInt(1940, 2003);
+			isInBidud = ThreadLocalRandom.current().nextBoolean();
+			elections.addCitizen(new Citizen("Joe_" + i, i, age, isInBidud));
+		}
+//		for (int i = 4; i < numOfParties; i++) {
+//			camp = ThreadLocalRandom.current().nextInt(0, 3);
+//			elections.addPoliticalParty("Party_" + i,ePoliticalOrientation.valueOf(camp);
+//		}
 	}
 
 	public static Elections hardCoded() {
@@ -156,31 +178,14 @@ public class Program {
 		elections.addCandidate(4, small.getNameOfParty());
 		elections.addCandidate(5, mercas.getNameOfParty());
 		elections.addCandidate(6, mercas.getNameOfParty());
-		// TEST
-//		Kalphi nKalphi = elections.GetKalphi(0);
-//		CoronaKalphi cKalphi = (CoronaKalphi) elections.GetKalphi(1);
-//		MilitaryKalphi mKalphi = (MilitaryKalphi) elections.GetKalphi(2);
-//		cKalphi.setVotingCount(3);
-//		nKalphi.setVotingCount(3);
-//		mKalphi.setVotingCount(3);
-//		cKalphi.Vote();
-//		nKalphi.Vote();
-//		mKalphi.Vote();
-		int age;
-		Boolean isInBidud;
-		for (int i = 7; i < 200; i++) {
-			age = ThreadLocalRandom.current().nextInt(1994, 2003);
-			isInBidud = ThreadLocalRandom.current().nextBoolean();
-			elections.addCitizen(new Citizen("Joe_" + i, i, age, isInBidud));
-		}
-//		elections.electionsRound();
+		fillRandom(elections);
 		return elections;
-
 	}
 
 	public static void main(String[] args) {
 		Elections elections = hardCoded();
-		System.out.println(elections.toString());
+//		System.out.println(elections.toString());
 		electionRound(elections);
+
 	}
 }

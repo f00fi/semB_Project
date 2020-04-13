@@ -17,27 +17,22 @@ public class CoronaKalphi extends Kalphi {
 		int partyChoice;
 		for (int i = 0; i < kalphiPhysSize; i++) {
 			IsVoting = ThreadLocalRandom.current().nextBoolean();
-			if (IsVoting) {
-				isWithSuite = ThreadLocalRandom.current().nextBoolean();
-				if (eliglbleCitizens[i].isIsolated && isWithSuite) {
-					partyChoice = ThreadLocalRandom.current().nextInt(0, votingCount.length);
-					votingCount[partyChoice]++;
-					
-				}
+			isWithSuite = ThreadLocalRandom.current().nextBoolean();
+			if (IsVoting && isWithSuite) {
+				partyChoice = ThreadLocalRandom.current().nextInt(0, votingCount.length);
+				votingCount[partyChoice]++;
+				numOfVoters++;
 			}
 		}
-		votingPercentage();
+		votingPercentage = ((double) numOfVoters) / kalphiPhysSize * 100;
 	}
 
 	@Override
 	public boolean equals(Kalphi newKalphi) {
-		
+
 		return super.equals(newKalphi);
 	}
-	
-	
-	
-	
+
 	@Override
 	public String toString() {
 		return super.toString();

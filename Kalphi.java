@@ -2,6 +2,7 @@ package Election;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
+import java.text.DecimalFormat;
 
 public class Kalphi {
 	protected int id;
@@ -9,6 +10,7 @@ public class Kalphi {
 	protected String kalphiAddress;
 	protected Citizen[] eliglbleCitizens;
 	protected int kalphiPhysSize, kalphiLogiSize;
+	protected int numOfVoters;
 	protected double votingPercentage;
 	protected int[] votingCount;
 
@@ -18,6 +20,7 @@ public class Kalphi {
 		kalphiLogiSize = 1;
 		this.eliglbleCitizens = new Citizen[kalphiLogiSize];
 		this.votingCount = new int[1];
+		numOfVoters = 0;
 	}
 
 	public Kalphi(Kalphi newKalphi) {
@@ -25,6 +28,7 @@ public class Kalphi {
 		this.kalphiAddress = newKalphi.kalphiAddress;
 		this.eliglbleCitizens = new Citizen[newKalphi.kalphiLogiSize];
 		this.votingCount = new int[1];
+		numOfVoters = 0;
 	}
 
 	public void addToKalphi(Citizen newCitizen) {
@@ -39,6 +43,22 @@ public class Kalphi {
 		eliglbleCitizens = temp;
 	}
 
+	public void Vote() {
+		if (kalphiPhysSize != 0) {
+			boolean IsVoting;
+			int partyChoice;
+			for (int i = 0; i < kalphiPhysSize; i++) {
+				IsVoting = ThreadLocalRandom.current().nextBoolean();
+				if (IsVoting) {
+					partyChoice = ThreadLocalRandom.current().nextInt(0, votingCount.length);
+					votingCount[partyChoice]++;
+					numOfVoters++;
+				}
+			}
+			votingPercentage = (((double) numOfVoters) / kalphiPhysSize * 100);
+		}
+	}
+
 	public String getKalphiAddress() {
 		return this.kalphiAddress;
 	}
@@ -51,36 +71,18 @@ public class Kalphi {
 		this.votingCount = new int[numOfParties];
 	}
 
-	public void Vote() {
-		boolean IsVoting;
-		int partyChoice;
-		for (int i = 0; i < kalphiPhysSize; i++) {
-			IsVoting = ThreadLocalRandom.current().nextBoolean();
-			if (IsVoting) {
-				partyChoice = ThreadLocalRandom.current().nextInt(0, votingCount.length);
-				votingCount[partyChoice]++;
-				
-			}
-		}
-		votingPercentage();
+	public int getNumOfVoters() {
+		return numOfVoters;
+	}
+
+	public double getVotingPercentage() {
+		return votingPercentage;
 	}
 
 	public boolean equals(Kalphi newKalphi) {
-		if (id == newKalphi.id) {
+		if (id == newKalphi.id)
 			return true;
-		}
 		return false;
-	}
-
-	protected void votingPercentage() {
-
-		double numOfVoters = 0;
-		for (int i = 0; i < votingCount.length; i++) {
-			numOfVoters += votingCount[i];
-		}
-
-		votingPercentage = (numOfVoters / kalphiPhysSize) * 100;
-
 	}
 
 	@Override

@@ -7,12 +7,13 @@ public class PoliticalParty {
 	public enum ePoliticalOrientation {
 		left, center, right
 	};
+
 	private String nameOfParty;
 	private LocalDate thePartyFoundingDate;
 	private Candidate[] candidatesList;
 	int candidatesListPhysSize, candidatesListLogiSize;
 	private ePoliticalOrientation politicalOrientation;
-	private Candidate[]candidatesListAfPrim;
+
 	public PoliticalParty(String nameOfParty, ePoliticalOrientation politicalOrientation,
 			LocalDate thePartyFoundingDate) {
 		this.nameOfParty = nameOfParty;
@@ -50,17 +51,14 @@ public class PoliticalParty {
 		return nameOfParty;
 	}
 
-	
-	public boolean equals(PoliticalParty newPoliticalParty)  {
-		if(nameOfParty.equalsIgnoreCase(newPoliticalParty.nameOfParty)) {
+	public boolean equals(PoliticalParty newPoliticalParty) {
+		if (nameOfParty.equalsIgnoreCase(newPoliticalParty.nameOfParty)) {
 			return true;
 		}
-			
+
 		return false;
 	}
-	
-	
-	
+
 	@Override
 	public String toString() {
 		String candidates = "";
