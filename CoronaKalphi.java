@@ -22,11 +22,22 @@ public class CoronaKalphi extends Kalphi {
 				if (eliglbleCitizens[i].isIsolated && isWithSuite) {
 					partyChoice = ThreadLocalRandom.current().nextInt(0, votingCount.length);
 					votingCount[partyChoice]++;
+					
 				}
 			}
 		}
+		votingPercentage();
 	}
 
+	@Override
+	public boolean equals(Kalphi newKalphi) {
+		
+		return super.equals(newKalphi);
+	}
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return super.toString();

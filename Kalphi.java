@@ -59,8 +59,28 @@ public class Kalphi {
 			if (IsVoting) {
 				partyChoice = ThreadLocalRandom.current().nextInt(0, votingCount.length);
 				votingCount[partyChoice]++;
+				
 			}
 		}
+		votingPercentage();
+	}
+
+	public boolean equals(Kalphi newKalphi) {
+		if (id == newKalphi.id) {
+			return true;
+		}
+		return false;
+	}
+
+	protected void votingPercentage() {
+
+		double numOfVoters = 0;
+		for (int i = 0; i < votingCount.length; i++) {
+			numOfVoters += votingCount[i];
+		}
+
+		votingPercentage = (numOfVoters / kalphiPhysSize) * 100;
+
 	}
 
 	@Override

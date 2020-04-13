@@ -38,9 +38,11 @@ public class Program {
 				elections.electionsRound();
 				break;
 			case 9:
-				if (elections.getElected())
+				if (elections.getElected()) {
 					elections.kalphiResult();
-				else {
+					
+				}
+					else {
 					System.out.println("***************************");
 					System.out.println("We didnt have elections yet");
 					System.out.println("***************************");

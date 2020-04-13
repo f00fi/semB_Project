@@ -26,6 +26,15 @@ public class Candidate extends Citizen {
 		this.politicalParty = newCandidate.politicalParty;
 	}
 
+	
+	
+	
+	@Override
+	public boolean equals(Citizen newCitizen) {
+		
+		return super.equals(newCitizen);
+	}
+
 	@Override
 	public String toString() {
 		return super.toString() + " Candidate for: " + politicalParty.getNameOfParty() + "\n";

@@ -36,6 +36,15 @@ public class Citizen {
 		return yearOfBirth;
 	}
 
+	
+	
+	public boolean equals(Citizen newCitizen) {
+		if(identityNumber==newCitizen.identityNumber) {
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public String toString() {
 		return "Name: " + name + "\n Identity number:" + identityNumber + "\n Year of birth: " + yearOfBirth

@@ -154,6 +154,7 @@ public class Elections {
 					+ kalphiList[i].getKalphiAddress() + "The results are:");
 			for (int j = 0; j < partyPhysSize; j++) {
 				System.out.println(partysList[j].getNameOfParty() + ": " + kalphiList[i].getVotingCount(j));
+			
 			}
 		}
 		System.out.println("*****************");
@@ -163,7 +164,8 @@ public class Elections {
 		}
 		System.out.println("*****************");
 	}
-
+	
+	
 	public void showCitizens() {
 		for (int i = 0; i < citiPhysSize; i++)
 			System.out.println(pinkasBoharim[i]);
@@ -188,6 +190,16 @@ public class Elections {
 		return kalphiList[kalphiID];
 	}
 
+	public boolean equals() {
+		
+		return true;
+	}
+	
+	
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		String boharim = "";
