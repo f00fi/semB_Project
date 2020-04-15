@@ -113,8 +113,8 @@ public class Program {
 
 	public static void fillRandom(Elections elections) {
 		int type, age, numOfCitizens, numOfCandidates, numOfKalphies, numOfParties, camp;
-		numOfCitizens = ThreadLocalRandom.current().nextInt(0, 100000);
-		numOfKalphies = numOfCitizens / 400;
+		numOfCitizens = ThreadLocalRandom.current().nextInt(0, 10000);
+		numOfKalphies = ThreadLocalRandom.current().nextInt(1, numOfCitizens / 400);
 		numOfParties = ThreadLocalRandom.current().nextInt(1, 20);
 		Boolean isInBidud;
 		for (int i = 4; i < numOfKalphies; i++) {
@@ -126,6 +126,7 @@ public class Program {
 			isInBidud = ThreadLocalRandom.current().nextBoolean();
 			elections.addCitizen(new Citizen("Joe_" + i, i, age, isInBidud));
 		}
+		System.out.println();
 //		for (int i = 4; i < numOfParties; i++) {
 //			camp = ThreadLocalRandom.current().nextInt(0, 3);
 //			elections.addPoliticalParty("Party_" + i,ePoliticalOrientation.valueOf(camp);

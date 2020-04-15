@@ -55,7 +55,8 @@ public class Kalphi {
 					numOfVoters++;
 				}
 			}
-			votingPercentage = (((double) numOfVoters) / kalphiPhysSize * 100);
+			double scale = Math.pow(10, 2);
+			votingPercentage = (Math.round((numOfVoters / (double) kalphiPhysSize * 100) * scale) / scale);
 		}
 	}
 

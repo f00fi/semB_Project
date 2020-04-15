@@ -156,7 +156,8 @@ public class Elections {
 			System.out.println("In " + kalphiList[i].getClass().getSimpleName() + " on "
 					+ kalphiList[i].getKalphiAddress() + " The results are:");
 			System.out.println("Total voters: " + kalphiList[i].getNumOfVoters());
-			System.out.println("Votes percetanage: " + kalphiList[i].getVotingPercentage() + "%");
+			System.out.printf("Votes percetanage: %.2f%% \n", kalphiList[i].getVotingPercentage());
+//			System.out.printf("Votes percetanage: " + kalphiList[i].getVotingPercentage() + "%");
 			for (int j = 0; j < partyPhysSize; j++) {
 				System.out.println(partysList[j].getNameOfParty() + ": " + kalphiList[i].getVotingCount(j));
 			}
