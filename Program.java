@@ -4,13 +4,11 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-import Election.PoliticalParty.ePoliticalOrientation;
-
 public class Program {
 	public static void electionRound(Elections elections) {
 		Scanner input = new Scanner(System.in);
 		int menuChoice = 0;
-		while (menuChoice != -1) {
+		while (menuChoice != 10) {
 			printMenuChoices();
 			menuChoice = input.nextInt();
 			switch (menuChoice) {
@@ -49,9 +47,9 @@ public class Program {
 					System.out.println("***************************");
 				}
 				break;
-			case -1:
+			case 10:
 				System.out.println("Cya in 3 months (;");
-				menuChoice = -1;
+				menuChoice = 10;
 				break;
 			}
 		}
@@ -68,7 +66,7 @@ public class Program {
 		System.out.println(" 7  - Show parties");
 		System.out.println(" 8  - Elections");
 		System.out.println(" 9  - Show results");
-		System.out.println("10 - Exit");
+		System.out.println(" 10 - Exit");
 	}
 
 	private static void printKalphiesTypes() {
@@ -112,10 +110,9 @@ public class Program {
 	}
 
 	public static void fillRandom(Elections elections) {
-		int type, age, numOfCitizens, numOfCandidates, numOfKalphies, numOfParties, camp;
+		int type, age, numOfCitizens, numOfKalphies;
 		numOfCitizens = ThreadLocalRandom.current().nextInt(0, 10000);
 		numOfKalphies = ThreadLocalRandom.current().nextInt(1, numOfCitizens / 400);
-		numOfParties = ThreadLocalRandom.current().nextInt(1, 20);
 		Boolean isInBidud;
 		for (int i = 4; i < numOfKalphies; i++) {
 			type = ThreadLocalRandom.current().nextInt(1, 4);
@@ -126,11 +123,6 @@ public class Program {
 			isInBidud = ThreadLocalRandom.current().nextBoolean();
 			elections.addCitizen(new Citizen("Joe_" + i, i, age, isInBidud));
 		}
-		System.out.println();
-//		for (int i = 4; i < numOfParties; i++) {
-//			camp = ThreadLocalRandom.current().nextInt(0, 3);
-//			elections.addPoliticalParty("Party_" + i,ePoliticalOrientation.valueOf(camp);
-//		}
 	}
 
 	public static Elections hardCoded() {
@@ -179,13 +171,12 @@ public class Program {
 		elections.addCandidate(4, small.getNameOfParty());
 		elections.addCandidate(5, mercas.getNameOfParty());
 		elections.addCandidate(6, mercas.getNameOfParty());
-		fillRandom(elections);
 		return elections;
 	}
 
 	public static void main(String[] args) {
 		Elections elections = hardCoded();
-//		System.out.println(elections.toString());
+		fillRandom(elections);
 		electionRound(elections);
 
 	}

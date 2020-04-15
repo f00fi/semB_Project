@@ -157,7 +157,6 @@ public class Elections {
 					+ kalphiList[i].getKalphiAddress() + " The results are:");
 			System.out.println("Total voters: " + kalphiList[i].getNumOfVoters());
 			System.out.printf("Votes percetanage: %.2f%% \n", kalphiList[i].getVotingPercentage());
-//			System.out.printf("Votes percetanage: " + kalphiList[i].getVotingPercentage() + "%");
 			for (int j = 0; j < partyPhysSize; j++) {
 				System.out.println(partysList[j].getNameOfParty() + ": " + kalphiList[i].getVotingCount(j));
 			}
@@ -195,8 +194,9 @@ public class Elections {
 		return kalphiList[kalphiID];
 	}
 
-	public boolean equals() {
-
+	public boolean equals(Elections elections) {
+		if (!(elections.electionsDate.equals(this.electionsDate)))
+			return false;
 		return true;
 	}
 

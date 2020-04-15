@@ -2,7 +2,6 @@ package Election;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
-import java.text.DecimalFormat;
 
 public class Kalphi {
 	protected int id;
