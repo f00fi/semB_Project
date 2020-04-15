@@ -54,8 +54,7 @@ public class Kalphi {
 					numOfVoters++;
 				}
 			}
-			double scale = Math.pow(10, 2);
-			votingPercentage = (Math.round((numOfVoters / (double) kalphiPhysSize * 100) * scale) / scale);
+			votingPercentage = setNumOfVoters(numOfVoters);
 		}
 	}
 
@@ -65,6 +64,13 @@ public class Kalphi {
 
 	public int getVotingCount(int partyIndex) {
 		return votingCount[partyIndex];
+	}
+
+	protected double setNumOfVoters(int numOfVoters) {
+		double scale = Math.pow(10, 2);
+		if (numOfVoters != 0)
+			return (Math.round((numOfVoters / (double) kalphiPhysSize * 100) * scale) / scale);
+		return 0;
 	}
 
 	protected void setVotingCount(int numOfParties) {
@@ -88,9 +94,9 @@ public class Kalphi {
 	@Override
 	public String toString() {
 		String eligString = "";
-		for (int i = 0; i < kalphiPhysSize; i++) {
-			eligString += eliglbleCitizens[i];
-		}
+//		for (int i = 0; i < kalphiPhysSize; i++) {
+//			eligString += eliglbleCitizens[i];
+//		}
 		return "Kalphi ID: " + id + "\n Type: " + this.getClass().getSimpleName() + "\n Kalphi address: "
 				+ kalphiAddress + "\n Eliglble citizens: " + eligString + "\n Voting percentage: " + votingPercentage
 				+ ",\n Voting count:" + Arrays.toString(votingCount) + "\n";

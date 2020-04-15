@@ -36,12 +36,9 @@ public class Citizen {
 		return yearOfBirth;
 	}
 
-	
-	
 	public boolean equals(Citizen newCitizen) {
-		if(identityNumber==newCitizen.identityNumber) {
+		if (identityNumber == newCitizen.identityNumber)
 			return true;
-		}
 		return false;
 	}
 

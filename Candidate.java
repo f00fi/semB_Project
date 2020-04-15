@@ -26,12 +26,9 @@ public class Candidate extends Citizen {
 		this.politicalParty = newCandidate.politicalParty;
 	}
 
-	
-	
-	
 	@Override
 	public boolean equals(Citizen newCitizen) {
-		
+
 		return super.equals(newCitizen);
 	}
 

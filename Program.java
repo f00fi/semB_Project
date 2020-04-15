@@ -36,6 +36,9 @@ public class Program {
 				break;
 			case 8:
 				elections.electionsRound();
+				System.out.println("*********************************************************************");
+				System.out.println("Congradualtions you have a new prime minister press 9 to show result");
+				System.out.println("*********************************************************************");
 				break;
 			case 9:
 				if (elections.getElected()) {
@@ -110,10 +113,10 @@ public class Program {
 	}
 
 	public static void fillRandom(Elections elections) {
-		int type, age, numOfCitizens, numOfKalphies;
-		numOfCitizens = ThreadLocalRandom.current().nextInt(0, 10000);
+		int type, age, numOfCitizens, numOfKalphies, numOfCandidates, camp;
+		numOfCitizens = ThreadLocalRandom.current().nextInt(0, 100000);
 		numOfKalphies = ThreadLocalRandom.current().nextInt(1, numOfCitizens / 400);
-		Boolean isInBidud;
+		Boolean isInBidud, isCandidate;
 		for (int i = 4; i < numOfKalphies; i++) {
 			type = ThreadLocalRandom.current().nextInt(1, 4);
 			elections.addKalphi(type, "Random Kalphi_" + i);
@@ -123,6 +126,25 @@ public class Program {
 			isInBidud = ThreadLocalRandom.current().nextBoolean();
 			elections.addCitizen(new Citizen("Joe_" + i, i, age, isInBidud));
 		}
+//		for (int i = 0; i < 3; i++) {
+//			for (int j = 7; j < numOfCitizens; j++) {
+//				isCandidate = ThreadLocalRandom.current().nextBoolean();
+//				camp = ThreadLocalRandom.current().nextInt(1, 4);
+//				if (isCandidate) {
+//					switch (camp) {
+//					case 1:
+//						elections.addCandidate(camp, "Yemin");
+//						break;
+//					case 2:
+//						elections.addCandidate(camp, "Mercas");
+//						break;
+//					case 3:
+//						elections.addCandidate(camp, "Small");
+//						break;
+//					}
+//				}
+//			}
+//		}
 	}
 
 	public static Elections hardCoded() {
@@ -145,8 +167,7 @@ public class Program {
 		Candidate mia = new Candidate("Mia", 3, 1985, false, small);
 		Candidate ariel = new Candidate("Ariel", 4, 1992, true, small);
 		Candidate lapid = new Candidate("Lapid", 5, 1985, false, mercas);
-		Candidate merav = new Candidate("Merav", 6, 1992, true, mercas);
-
+		Candidate meirav = new Candidate("Meirav", 6, 1992, true, mercas);
 		Elections elections = new Elections();
 		elections.addKalphi(1, "Tel Aviv 1");
 		elections.addKalphi(2, "Kfar Yona 2");
@@ -161,7 +182,7 @@ public class Program {
 		elections.addCitizen(mia);
 		elections.addCitizen(ariel);
 		elections.addCitizen(lapid);
-		elections.addCitizen(merav);
+		elections.addCitizen(meirav);
 		elections.addPoliticalParty(yemin);
 		elections.addPoliticalParty(mercas);
 		elections.addPoliticalParty(small);
@@ -178,6 +199,5 @@ public class Program {
 		Elections elections = hardCoded();
 		fillRandom(elections);
 		electionRound(elections);
-
 	}
 }

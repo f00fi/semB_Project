@@ -58,12 +58,22 @@ public class Elections {
 	}
 
 	public boolean addCitizen(Citizen newCitizen) {
+		if (isAlreadyCitizen(newCitizen))
+			return false;
 		if (citiPhysSize == citiLogiSize)
 			allocateCitizenLogicSize();
 		pinkasBoharim[citiPhysSize] = newCitizen;
 		citiPhysSize++;
 		assignKalphi(newCitizen);
 		return true;
+	}
+
+	private boolean isAlreadyCitizen(Citizen newCitizen) {
+		for (int i = 0; i < citiPhysSize; i++) {
+			if (newCitizen.equals(pinkasBoharim[i]))
+				return true;
+		}
+		return false;
 	}
 
 	private void allocateCitizenLogicSize() {
@@ -90,7 +100,7 @@ public class Elections {
 		for (int i = 0; i < citiPhysSize; i++) {
 			if (pinkasBoharim[i].getIdentityNumber() == identityNumber) {
 				for (int j = 0; j < partyPhysSize; j++) {
-					if (partysList[j].getNameOfParty().equals(nameOfParty)) {
+					if (partysList[j].getNameOfParty().equalsIgnoreCase(nameOfParty)) {
 						pinkasBoharim[i] = new Candidate(pinkasBoharim[i], partysList[j]);
 						partysList[j].addCandidate((Candidate) pinkasBoharim[i]);
 						return true;
@@ -137,13 +147,33 @@ public class Elections {
 		}
 	}
 
+	private void primaries() {
+		for (int i = 0; i < partyPhysSize; i++) {
+			partysList[i].primaries();
+		}
+	}
+
 	public void electionsRound() {
 		electionsResults = new int[partyPhysSize];
+		primaries();
 		for (int i = 0; i < kalphiPhysSize; i++) {
 			kalphiList[i].setVotingCount(partyPhysSize);// sync parties list with kalphies
 			kalphiList[i].Vote();
 			for (int j = 0; j < partyPhysSize; j++) {
 				electionsResults[j] += kalphiList[i].getVotingCount(j);
+			}
+		}
+		for (int i = electionsResults.length - 1; i > 0; i--) {
+			for (int j = 0; j < i; j++) {
+				if (electionsResults[j] < electionsResults[j + 1]) {
+					PoliticalParty temp = partysList[j];
+					int tempInt = electionsResults[j];
+					partysList[j] = partysList[j + 1];
+					electionsResults[j] = electionsResults[j + 1];
+					partysList[j + 1] = temp;
+					electionsResults[j + 1] = tempInt;
+
+				}
 			}
 		}
 		electionsDate = LocalDate.now();
@@ -166,6 +196,8 @@ public class Elections {
 		for (int j = 0; j < partyPhysSize; j++) {
 			System.out.println(partysList[j].getNameOfParty() + ": " + electionsResults[j]);
 		}
+		System.out
+				.println(partysList[0].getNameOfParty() + " party won, running by " + partysList[0].getCandidateName());
 		System.out.println("*****************");
 
 	}
@@ -194,6 +226,10 @@ public class Elections {
 		return kalphiList[kalphiID];
 	}
 
+	public boolean getElected() {
+		return elected;
+	}
+
 	public boolean equals(Elections elections) {
 		if (!(elections.electionsDate.equals(this.electionsDate)))
 			return false;
@@ -217,10 +253,6 @@ public class Elections {
 		return String.format(
 				"Elections round:\n" + "Voters List:\n %s " + "\nPartys List:\n %s \n" + "\nKalphi List:\n %s \n",
 				boharim, parties, kalphis);
-	}
-
-	public boolean getElected() {
-		return elected;
 	}
 
 }

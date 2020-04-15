@@ -47,8 +47,29 @@ public class PoliticalParty {
 		candidatesList = temp;
 	}
 
+	public void primaries() {
+		int[] arr = new int[candidatesListPhysSize];
+		for (int i = 0; i < candidatesListPhysSize; i++) {
+			int rand = ((int) (Math.random() * candidatesListPhysSize));
+			arr[rand]++;
+		}
+		for (int i = arr.length - 1; i > 0; i--) {
+			for (int j = 0; j < i; j++) {
+				if (arr[j] < arr[j + 1]) {
+					Candidate temp = candidatesList[j];
+					candidatesList[j] = candidatesList[j + 1];
+					candidatesList[j + 1] = temp;
+				}
+			}
+		}
+	}
+
 	public String getNameOfParty() {
 		return nameOfParty;
+	}
+
+	public String getCandidateName() {
+		return candidatesList[0].name;
 	}
 
 	public boolean equals(PoliticalParty newPoliticalParty) {
