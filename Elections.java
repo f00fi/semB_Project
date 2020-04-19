@@ -6,100 +6,97 @@ import java.util.Arrays;
 public class Elections {
 
 	private Citizen[] pinkasBoharim;
-	private int citiLogiSize;
 	private int citiPhysSize;
+	private int citiLogiSize;
 	private PoliticalParty[] partysList;
 	private int[] electionsResults;
-	private int partyLogiSize;
 	private int partyPhysSize;
+	private int partyLogiSize;
 	private Kalphi[] kalphiList;
-	private int kalphiLogiSize;
 	private int kalphiPhysSize;
+	private int kalphiLogiSize;
 	private boolean elected;
 	private LocalDate electionsDate;
 
 	public Elections() {
-		citiLogiSize = 1;
-		citiPhysSize = 0;
-		partyLogiSize = 1;
-		partyPhysSize = 0;
-		kalphiLogiSize = 1;
-		kalphiPhysSize = 0;
-		pinkasBoharim = new Citizen[citiLogiSize];
-		partysList = new PoliticalParty[partyLogiSize];
-		kalphiList = new Kalphi[kalphiLogiSize];
+		citiPhysSize = 1;
+		partyPhysSize = 1;
+		kalphiPhysSize = 1;
+		pinkasBoharim = new Citizen[citiPhysSize];
+		partysList = new PoliticalParty[partyPhysSize];
+		kalphiList = new Kalphi[kalphiPhysSize];
 		elected = false;
 		electionsResults = new int[1];
 	}
 
 	public boolean addKalphi(int type, String address) {
-		if (kalphiPhysSize == kalphiLogiSize)
-			allocateKalphiLogicSize();
+		if (kalphiLogiSize == kalphiPhysSize)
+			allocateKalphiPhysSize();
 		if (type == 1) {
-			kalphiList[kalphiPhysSize] = new Kalphi(address);
-			kalphiPhysSize++;
+			kalphiList[kalphiLogiSize] = new Kalphi(address);
+			kalphiLogiSize++;
 			return true;
 		} else if (type == 2) {
-			kalphiList[kalphiPhysSize] = new CoronaKalphi(address);
-			kalphiPhysSize++;
+			kalphiList[kalphiLogiSize] = new CoronaKalphi(address);
+			kalphiLogiSize++;
 			return true;
 		} else if (type == 3) {
-			kalphiList[kalphiPhysSize] = new MilitaryKalphi(address);
-			kalphiPhysSize++;
+			kalphiList[kalphiLogiSize] = new MilitaryKalphi(address);
+			kalphiLogiSize++;
 			return true;
 		}
 		return false;
 	}
 
-	private void allocateKalphiLogicSize() {
-		kalphiLogiSize = kalphiLogiSize * 2;
-		Kalphi[] temp = Arrays.copyOf(kalphiList, kalphiLogiSize);
+	private void allocateKalphiPhysSize() {
+		kalphiPhysSize = kalphiPhysSize * 2;
+		Kalphi[] temp = Arrays.copyOf(kalphiList, kalphiPhysSize);
 		kalphiList = temp;
 	}
 
 	public boolean addCitizen(Citizen newCitizen) {
 		if (isAlreadyCitizen(newCitizen))
 			return false;
-		if (citiPhysSize == citiLogiSize)
-			allocateCitizenLogicSize();
-		pinkasBoharim[citiPhysSize] = newCitizen;
-		citiPhysSize++;
+		if (citiLogiSize == citiPhysSize)
+			allocateCitizenPhysSize();
+		pinkasBoharim[citiLogiSize] = newCitizen;
+		citiLogiSize++;
 		assignKalphi(newCitizen);
 		return true;
 	}
 
 	private boolean isAlreadyCitizen(Citizen newCitizen) {
-		for (int i = 0; i < citiPhysSize; i++) {
+		for (int i = 0; i < citiLogiSize; i++) {
 			if (newCitizen.equals(pinkasBoharim[i]))
 				return true;
 		}
 		return false;
 	}
 
-	private void allocateCitizenLogicSize() {
-		citiLogiSize = citiLogiSize * 2;
-		Citizen[] temp = Arrays.copyOf(pinkasBoharim, citiLogiSize);
+	private void allocateCitizenPhysSize() {
+		citiPhysSize = citiPhysSize * 2;
+		Citizen[] temp = Arrays.copyOf(pinkasBoharim, citiPhysSize);
 		pinkasBoharim = temp;
 	}
 
 	public boolean addPoliticalParty(PoliticalParty newPoliticalParty) {
-		if (partyPhysSize == partyLogiSize)
-			allocatePoliticalPartyLogicSize();
-		partysList[partyPhysSize] = newPoliticalParty;
-		partyPhysSize++;
+		if (partyLogiSize == partyPhysSize)
+			allocatePoliticalPartyPhysSize();
+		partysList[partyLogiSize] = newPoliticalParty;
+		partyLogiSize++;
 		return true;
 	}
 
-	private void allocatePoliticalPartyLogicSize() {
-		partyLogiSize = partyLogiSize * 2;
-		PoliticalParty[] temp = Arrays.copyOf(partysList, partyLogiSize);
+	private void allocatePoliticalPartyPhysSize() {
+		partyPhysSize = partyPhysSize * 2;
+		PoliticalParty[] temp = Arrays.copyOf(partysList, partyPhysSize);
 		partysList = temp;
 	}
 
 	public boolean addCandidate(int identityNumber, String nameOfParty) {
-		for (int i = 0; i < citiPhysSize; i++) {
+		for (int i = 0; i < citiLogiSize; i++) {
 			if (pinkasBoharim[i].getIdentityNumber() == identityNumber) {
-				for (int j = 0; j < partyPhysSize; j++) {
+				for (int j = 0; j < partyLogiSize; j++) {
 					if (partysList[j].getNameOfParty().equalsIgnoreCase(nameOfParty)) {
 						pinkasBoharim[i] = new Candidate(pinkasBoharim[i], partysList[j]);
 						partysList[j].addCandidate((Candidate) pinkasBoharim[i]);
@@ -108,7 +105,7 @@ public class Elections {
 				}
 			}
 		}
-		System.out.println("couldnt add candidate");
+		System.out.println("could not add candidate");
 		return false;
 	}
 
@@ -142,24 +139,24 @@ public class Elections {
 					return i;
 			}
 			i++;
-			if (i == kalphiPhysSize)
+			if (i == kalphiLogiSize)
 				i = 0;
 		}
 	}
 
 	private void primaries() {
-		for (int i = 0; i < partyPhysSize; i++) {
+		for (int i = 0; i < partyLogiSize; i++) {
 			partysList[i].primaries();
 		}
 	}
 
 	public void electionsRound() {
-		electionsResults = new int[partyPhysSize];
+		electionsResults = new int[partyLogiSize];
 		primaries();
-		for (int i = 0; i < kalphiPhysSize; i++) {
-			kalphiList[i].setVotingCount(partyPhysSize);// sync parties list with kalphies
+		for (int i = 0; i < kalphiLogiSize; i++) {
+			kalphiList[i].setVotingCount(partyLogiSize);// sync parties list with kalphies
 			kalphiList[i].Vote();
-			for (int j = 0; j < partyPhysSize; j++) {
+			for (int j = 0; j < partyLogiSize; j++) {
 				electionsResults[j] += kalphiList[i].getVotingCount(j);
 			}
 		}
@@ -181,19 +178,20 @@ public class Elections {
 	}
 
 	public void kalphiResult() {
-		for (int i = 0; i < kalphiPhysSize; i++) {
+		System.out.println("On the elections that run on "+ this.electionsDate+ "the results  are:");
+		for (int i = 0; i < kalphiLogiSize; i++) {
 			System.out.println("***********************************************************************");
 			System.out.println("In " + kalphiList[i].getClass().getSimpleName() + " on "
 					+ kalphiList[i].getKalphiAddress() + " The results are:");
 			System.out.println("Total voters: " + kalphiList[i].getNumOfVoters());
 			System.out.printf("Votes percetanage: %.2f%% \n", kalphiList[i].getVotingPercentage());
-			for (int j = 0; j < partyPhysSize; j++) {
+			for (int j = 0; j < partyLogiSize; j++) {
 				System.out.println(partysList[j].getNameOfParty() + ": " + kalphiList[i].getVotingCount(j));
 			}
 		}
 		System.out.println("*****************");
 		System.out.println("Total Votes:");
-		for (int j = 0; j < partyPhysSize; j++) {
+		for (int j = 0; j < partyLogiSize; j++) {
 			System.out.println(partysList[j].getNameOfParty() + ": " + electionsResults[j]);
 		}
 		System.out
@@ -203,17 +201,17 @@ public class Elections {
 	}
 
 	public void showCitizens() {
-		for (int i = 0; i < citiPhysSize; i++)
+		for (int i = 0; i < citiLogiSize; i++)
 			System.out.println(pinkasBoharim[i]);
 	}
 
 	public void showPartysList() {
-		for (int i = 0; i < partyPhysSize; i++)
+		for (int i = 0; i < partyLogiSize; i++)
 			System.out.println(partysList[i]);
 	}
 
 	public void showKalphiList() {
-		for (int i = 0; i < kalphiPhysSize; i++)
+		for (int i = 0; i < kalphiLogiSize; i++)
 			System.out.println(kalphiList[i]);
 	}
 
@@ -239,15 +237,15 @@ public class Elections {
 	@Override
 	public String toString() {
 		String boharim = "";
-		for (int i = 0; i < citiPhysSize; i++) {
+		for (int i = 0; i < citiLogiSize; i++) {
 			boharim += pinkasBoharim[i];
 		}
 		String kalphis = "";
-		for (int i = 0; i < kalphiPhysSize; i++) {
+		for (int i = 0; i < kalphiLogiSize; i++) {
 			kalphis += kalphiList[i];
 		}
 		String parties = "";
-		for (int i = 0; i < partyPhysSize; i++) {
+		for (int i = 0; i < partyLogiSize; i++) {
 			parties += partysList[i];
 		}
 		return String.format(
