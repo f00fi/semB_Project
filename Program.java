@@ -1,3 +1,5 @@
+//Eddie Abramov 307947655 
+//Omer Ichay 204308886
 package Election;
 
 import java.time.LocalDate;
@@ -37,7 +39,7 @@ public class Program {
 			case 8:
 				elections.electionsRound();
 				System.out.println("*********************************************************************");
-				System.out.println("Congradualtions you have a new prime minister press 9 to show result");
+				System.out.println("Congradualtions! press 9 to show elections result");
 				System.out.println("*********************************************************************");
 				break;
 			case 9:
@@ -82,8 +84,9 @@ public class Program {
 	private static void chooseKalphiType(Elections elections, int kalphiType, Scanner input) {
 		boolean added;
 		System.out.println("Please enter "
-				+ (kalphiType == 1 ? "kalphi " : kalphiType == 2 ? "corona " : kalphiType == 3 ? "millitary " : "")
-				+ "kalphi address");
+				+ (kalphiType == 1 ? "kalphi "
+						: kalphiType == 2 ? "corona kalphi" : kalphiType == 3 ? "millitary kalphi" : "")
+				+ " address (one word no spaces)");
 		added = elections.addKalphi(kalphiType, input.next());
 		System.out.println(added == true ? "Kalphi added" : "failed to add kalphi");
 	}
@@ -109,51 +112,35 @@ public class Program {
 
 	public static void addCandidate(Elections elections, Scanner input) {
 		System.out.println("plese entar identity number and political Party name ");
-		elections.addCandidate(input.nextInt(), input.next());
+		if (elections.addCandidate(input.nextInt(), input.next()))
+			System.out.println("candidate added");
+		else
+			System.out.println("could not add candidate");
 	}
 
 	public static void fillRandom(Elections elections) {
-		int type, age, numOfCitizens, numOfKalphies, numOfCandidates, camp;
-		numOfCitizens = ThreadLocalRandom.current().nextInt(0, 100000);
-		numOfKalphies = ThreadLocalRandom.current().nextInt(1, numOfCitizens / 400);
-		Boolean isInBidud, isCandidate;
+		int type, age, numOfCitizens, numOfKalphies;
+		numOfCitizens = ThreadLocalRandom.current().nextInt(0, 1000);
+		numOfKalphies = ThreadLocalRandom.current().nextInt(1, 40);
+		Boolean isInBidud;
 		for (int i = 4; i < numOfKalphies; i++) {
 			type = ThreadLocalRandom.current().nextInt(1, 4);
 			elections.addKalphi(type, "Random Kalphi_" + i);
 		}
-		for (int i = 7; i < numOfCitizens; i++) {
+		for (int i = 12; i < numOfCitizens; i++) {
 			age = ThreadLocalRandom.current().nextInt(1940, 2003);
 			isInBidud = ThreadLocalRandom.current().nextBoolean();
 			elections.addCitizen(new Citizen("Joe_" + i, i, age, isInBidud));
 		}
-//		for (int i = 0; i < 3; i++) {
-//			for (int j = 7; j < numOfCitizens; j++) {
-//				isCandidate = ThreadLocalRandom.current().nextBoolean();
-//				camp = ThreadLocalRandom.current().nextInt(1, 4);
-//				if (isCandidate) {
-//					switch (camp) {
-//					case 1:
-//						elections.addCandidate(camp, "Yemin");
-//						break;
-//					case 2:
-//						elections.addCandidate(camp, "Mercas");
-//						break;
-//					case 3:
-//						elections.addCandidate(camp, "Small");
-//						break;
-//					}
-//				}
-//			}
-//		}
 	}
 
 	public static Elections hardCoded() {
 		// 5 citizens
-		Citizen eddie = new Citizen("Eddie", 3835693, 1992, true);
-		Citizen omer = new Citizen("Omer", 45425, 1994, false);
-		Citizen dor = new Citizen("Dor", 24545, 1998, false);
-		Citizen lior = new Citizen("Lior", 454545, 1992, true);
-		Citizen shahaf = new Citizen("Shahaf", 425542, 1994, false);
+		Citizen eddie = new Citizen("Eddie", 1, 1992, true);
+		Citizen omer = new Citizen("Omer", 2, 1994, false);
+		Citizen dor = new Citizen("Dor", 3, 1998, false);
+		Citizen lior = new Citizen("Lior", 4, 1992, true);
+		Citizen shahaf = new Citizen("Shahaf", 5, 1994, false);
 		// 3 Parties
 		PoliticalParty yemin = new PoliticalParty("Yemin", PoliticalParty.ePoliticalOrientation.right,
 				LocalDate.of(2020, 04, 20));
@@ -162,12 +149,12 @@ public class Program {
 		PoliticalParty small = new PoliticalParty("Small", PoliticalParty.ePoliticalOrientation.left,
 				LocalDate.of(2020, 04, 20));
 		// 6 candidates
-		Candidate bibi = new Candidate("Benyamin", 1, 1960, false, yemin);
-		Candidate gantz = new Candidate("Gantz", 2, 1994, false, yemin);
-		Candidate mia = new Candidate("Mia", 3, 1985, false, small);
-		Candidate ariel = new Candidate("Ariel", 4, 1992, true, small);
-		Candidate lapid = new Candidate("Lapid", 5, 1985, false, mercas);
-		Candidate meirav = new Candidate("Meirav", 6, 1992, true, mercas);
+		Citizen bibi = new Citizen("Benyamin", 6, 1960, false);
+		Citizen gantz = new Citizen("Gantz", 7, 1994, false);
+		Citizen mia = new Citizen("Mia", 8, 1985, false);
+		Citizen ariel = new Citizen("Ariel", 9, 1992, true);
+		Citizen lapid = new Citizen("Lapid", 10, 1985, false);
+		Citizen meirav = new Citizen("Meirav", 11, 1992, true);
 		Elections elections = new Elections();
 		elections.addKalphi(1, "Tel Aviv 1");
 		elections.addKalphi(2, "Kfar Yona 2");
@@ -186,18 +173,18 @@ public class Program {
 		elections.addPoliticalParty(yemin);
 		elections.addPoliticalParty(mercas);
 		elections.addPoliticalParty(small);
-		elections.addCandidate(1, yemin.getNameOfParty());
-		elections.addCandidate(2, yemin.getNameOfParty());
-		elections.addCandidate(3, small.getNameOfParty());
-		elections.addCandidate(4, small.getNameOfParty());
-		elections.addCandidate(5, mercas.getNameOfParty());
-		elections.addCandidate(6, mercas.getNameOfParty());
+		elections.addCandidate(6, yemin.getNameOfParty());
+		elections.addCandidate(7, yemin.getNameOfParty());
+		elections.addCandidate(8, small.getNameOfParty());
+		elections.addCandidate(9, small.getNameOfParty());
+		elections.addCandidate(10, mercas.getNameOfParty());
+		elections.addCandidate(11, mercas.getNameOfParty());
 		return elections;
 	}
 
 	public static void main(String[] args) {
-		Elections elections = hardCoded();
-		fillRandom(elections);
+		Elections elections = hardCoded();// fills with hardcoded data
+//		fillRandom(elections); //static function which generates random citizens and random kalphis for testing. 
 		electionRound(elections);
 	}
 }

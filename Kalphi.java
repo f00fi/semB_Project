@@ -8,7 +8,7 @@ public class Kalphi {
 	protected static int idCounter = 1;
 	protected String kalphiAddress;
 	protected Citizen[] eliglbleCitizens;
-	protected int kalphiPhysSize, kalphiLogiSize;
+	protected int kalphiLogiSize, kalphiPhysSize;
 	protected int numOfVoters;
 	protected double votingPercentage;
 	protected int[] votingCount;
@@ -16,8 +16,8 @@ public class Kalphi {
 	public Kalphi(String kalphiAddress) {
 		this.id = idCounter++;
 		this.kalphiAddress = kalphiAddress;
-		kalphiLogiSize = 1;
-		this.eliglbleCitizens = new Citizen[kalphiLogiSize];
+		kalphiPhysSize = 1;
+		this.eliglbleCitizens = new Citizen[kalphiPhysSize];
 		this.votingCount = new int[1];
 		numOfVoters = 0;
 	}
@@ -25,28 +25,29 @@ public class Kalphi {
 	public Kalphi(Kalphi newKalphi) {
 		this.id = newKalphi.id;
 		this.kalphiAddress = newKalphi.kalphiAddress;
-		this.eliglbleCitizens = new Citizen[newKalphi.kalphiLogiSize];
+		this.eliglbleCitizens = new Citizen[newKalphi.kalphiPhysSize];
 		this.votingCount = new int[1];
 		numOfVoters = 0;
 	}
 
 	public void addToKalphi(Citizen newCitizen) {
-		if (kalphiPhysSize == kalphiLogiSize)
-			allocateCitizenLogicSize();
-		eliglbleCitizens[kalphiPhysSize++] = newCitizen;
+		if (kalphiLogiSize == kalphiPhysSize)
+			allocateCitizenPhysSize();
+		eliglbleCitizens[kalphiLogiSize++] = newCitizen;
 	}
 
-	private void allocateCitizenLogicSize() {
-		kalphiLogiSize = kalphiLogiSize * 2;
-		Citizen[] temp = Arrays.copyOf(eliglbleCitizens, kalphiLogiSize);
+	private void allocateCitizenPhysSize() {
+		kalphiPhysSize = kalphiPhysSize * 2;
+		Citizen[] temp = Arrays.copyOf(eliglbleCitizens, kalphiPhysSize);
 		eliglbleCitizens = temp;
 	}
 
 	public void Vote() {
-		if (kalphiPhysSize != 0) {
+		numOfVoters = 0;
+		if (kalphiLogiSize != 0) {
 			boolean IsVoting;
 			int partyChoice;
-			for (int i = 0; i < kalphiPhysSize; i++) {
+			for (int i = 0; i < kalphiLogiSize; i++) {
 				IsVoting = ThreadLocalRandom.current().nextBoolean();
 				if (IsVoting) {
 					partyChoice = ThreadLocalRandom.current().nextInt(0, votingCount.length);
@@ -54,7 +55,7 @@ public class Kalphi {
 					numOfVoters++;
 				}
 			}
-			votingPercentage = setNumOfVoters(numOfVoters);
+			votingPercentage = calcNumOfVoters(numOfVoters);
 		}
 	}
 
@@ -66,10 +67,10 @@ public class Kalphi {
 		return votingCount[partyIndex];
 	}
 
-	protected double setNumOfVoters(int numOfVoters) {
+	protected double calcNumOfVoters(int numOfVoters) {
 		double scale = Math.pow(10, 2);
 		if (numOfVoters != 0)
-			return (Math.round((numOfVoters / (double) kalphiPhysSize * 100) * scale) / scale);
+			return (Math.round((numOfVoters / (double) kalphiLogiSize * 100) * scale) / scale);
 		return 0;
 	}
 
@@ -93,13 +94,10 @@ public class Kalphi {
 
 	@Override
 	public String toString() {
-		String eligString = "";
-//		for (int i = 0; i < kalphiPhysSize; i++) {
-//			eligString += eliglbleCitizens[i];
-//		}
+
 		return "Kalphi ID: " + id + "\n Type: " + this.getClass().getSimpleName() + "\n Kalphi address: "
-				+ kalphiAddress + "\n Eliglble citizens: " + eligString + "\n Voting percentage: " + votingPercentage
-				+ ",\n Voting count:" + Arrays.toString(votingCount) + "\n";
+				+ kalphiAddress + "\n Voting percentage: " + votingPercentage + "% \n Voting count:"
+				+ Arrays.toString(votingCount) + "\n";
 	}
 
 }

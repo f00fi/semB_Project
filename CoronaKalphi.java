@@ -13,6 +13,7 @@ public class CoronaKalphi extends Kalphi {
 	}
 
 	public void Vote() {
+		numOfVoters = 0;
 		boolean IsVoting, isWithSuite;
 		int partyChoice;
 		for (int i = 0; i < kalphiPhysSize; i++) {
@@ -24,7 +25,7 @@ public class CoronaKalphi extends Kalphi {
 				numOfVoters++;
 			}
 		}
-		votingPercentage = ((double) numOfVoters) / kalphiPhysSize * 100;
+		votingPercentage = calcNumOfVoters(numOfVoters);
 	}
 
 	@Override
