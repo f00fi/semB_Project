@@ -3,7 +3,9 @@ package Election;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Kalphi {
+public class Kalphi<T extends Citizen>   {
+	
+	
 	protected int id;
 	protected static int idCounter = 1;
 	protected String kalphiAddress;
@@ -22,10 +24,10 @@ public class Kalphi {
 		numOfVoters = 0;
 	}
 
-	public Kalphi(Kalphi newKalphi) {
+	public Kalphi(Kalphi newKalphi<>) {
 		this.id = newKalphi.id;
 		this.kalphiAddress = newKalphi.kalphiAddress;
-		this.eliglbleCitizens = new Citizen[newKalphi.kalphiPhysSize];
+		this.eliglbleCitizens = (T[])new Object[newKalphi.kalphiPhysSize];
 		this.votingCount = new int[1];
 		numOfVoters = 0;
 	}

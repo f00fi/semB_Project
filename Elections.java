@@ -97,7 +97,7 @@ public class Elections {
 		partysList = temp;
 	}
 
-	public boolean addCandidate(int identityNumber, String nameOfParty) {
+	public boolean addCandidate(String identityNumber, String nameOfParty) throws notNineNumException, notAllNumExcepiton, notValidAgeExceptions {
 		for (int i = 0; i < citiLogiSize; i++) {
 			if (pinkasBoharim[i].getIdentityNumber() == identityNumber) {
 				if (!(pinkasBoharim[i] instanceof Candidate))// cant be already candidate
